@@ -25,15 +25,16 @@
     <script type="text/javascript" charset="utf-8">
       document.addEventListener("deviceready", onDeviceReady, false);
       function onDeviceReady() {
-        //var element = document.getElementById('Imei');
-        //element.innerHTML = device.uuid;
-        window.plugins.imeiplugin.getImei(callback);
+        var element = document.getElementById('Imei');
+        element.innerHTML = device.uuid;
+        //window.plugins.imeiplugin.getImei(callback);
       }
-
+/*
       function callback(imei) {
         var element = document.getElementById('Imei');
         element.innerHTML = imei;
       }
+*/  
     </script>
 
   </body>
