@@ -18,15 +18,21 @@
 
   <body onload="init()">
 
-	<h1 style="text-align: center; margin-top: 10%;color: #fff;" id="Imei"></h1>
+	<h1 style="text-align: center; margin-top: 25%;color: #fff;" id="Imei"></h1>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="cordova.js" type="text/javascript"></script>
     
     <script type="text/javascript" charset="utf-8">
       document.addEventListener("deviceready", onDeviceReady, false);
       function onDeviceReady() {
+        //var element = document.getElementById('Imei');
+        //element.innerHTML = device.uuid;
+        window.plugins.imeiplugin.getImei(callback);
+      }
+
+      function callback(imei) {
         var element = document.getElementById('Imei');
-        element.innerHTML = device.uuid;
+        element.innerHTML = imei;
       }
     </script>
 
