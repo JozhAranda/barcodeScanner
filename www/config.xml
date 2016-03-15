@@ -40,7 +40,7 @@
         Define a specific version of PhoneGap to build into your app.
         <preference name="phonegap-version"       value="3.5.0" />
     -->
-    <preference name="phonegap-version"       value="4.3" />
+    <preference name="phonegap-version"       value="cli-5.1.1" />
     <!-- Plugins -->
 
     <!-- Core plugins -->
@@ -55,7 +55,6 @@
     <!--
         <gap:plugin name="com.phonegap.plugins.barcodescanner" />
     -->
-    <plugin name="com.joandilee.imeiplugin" spec="0.1" source="pgb" />
     <!-- Define app icon for each platform. -->
     <icon src="icon.png" />
     <!--icon src="res/icon/android/icon-36-ldpi.png"   gap:platform="android"    gap:qualifier="ldpi" />
