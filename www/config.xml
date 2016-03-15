@@ -40,7 +40,7 @@
         Define a specific version of PhoneGap to build into your app.
         <preference name="phonegap-version"       value="3.5.0" />
     -->
-    <preference name="phonegap-version"       value=">=4.0.0" />
+    <preference name="phonegap-version"       value="4.2.0" />
     <!-- Plugins -->
 
     <!-- Core plugins -->
