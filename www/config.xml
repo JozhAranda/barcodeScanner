@@ -41,6 +41,7 @@
         <preference name="phonegap-version"       value="3.5.0" />
     -->
     <preference name="android-build-tool" value="gradle" />
+    <preference name="android-build-tool" value="ant" />
     <preference name="phonegap-version"       value="cli-5.1.1" />
     <!-- Plugins -->
 
