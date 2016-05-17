@@ -3,7 +3,8 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">    
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <meta name="theme-color" content="#db5945">
+    <meta name="theme-color" content="#ddddd">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -12,28 +13,41 @@
     <![endif]-->
     <style>
       body {
-        background: #db5945;
+        background: #eee;
       }
     </style>
   </head>
 
   <body onload="init()">
 
+    <div class="col-xs-6 col-xs-offset-3" style="margin-top: 22%;">
+      <button class="btn btn-primary btn-lg btn-block" id="scan">Scan</button>
+    </div>
+
 	  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="cordova.js" type="text/javascript"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
+
     <script type="text/javascript" charset="utf-8">
       document.addEventListener("deviceready", onDeviceReady, false);
       function onDeviceReady() {
 
-        AndroidWear.onConnect(function(e) {
-          alert("Connection Successfully Established - handle: " + e.handle);
+        $(function() {
+          $('#scan').on('click touch', function(e) {
 
-          AndroidWear.onDataReceived(e.handle, function(e) {
-            alert("Data received - handle: " + e.handle + " data: "+ e.data);
+            cordova.plugins.barcodeScanner.scan(
+              function (result) {
+                alert("We got a barcode\n" +
+                  "Result: " + result.text + "\n" +
+                  "Format: " + result.format + "\n" +
+                  "Cancelled: " + result.cancelled);
+              }, 
+              function (error) {
+                alert("Scanning failed: " + error);
+              }
+            );
+
           });
-
-          AndroidWear.sendData(e.handle, "Hello From Cordova!");
         });
 
       }
