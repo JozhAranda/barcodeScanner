@@ -3,13 +3,13 @@
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "com.phonegap.merma"
+        id        = "com.phonegap.inventario"
         version   = "0.0.5">
 
-    <name>Mermas</name>
+    <name>Inventario</name>
 
     <description>
-        Mermas
+        Inventario
     </description>
 
     <author href="http://www.cdf.com.mx" email="jaranda@cdf.com.mx">
@@ -51,6 +51,7 @@
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <!-- Third party plugins -->
     <plugin name="com.phonegap.plugins.barcodescanner" spec="2.2.0" source="pgb" />
+    <plugin name="com.joandilee.imeiplugin" spec="0.1" source="pgb" />
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
     <!--
         <gap:plugin name="com.phonegap.plugins.barcodescanner" />
