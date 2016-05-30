@@ -110,7 +110,7 @@
       	function onDeviceReady() {
 
 			if (window.datawedge) {
-				datawedge.start("com.bluefletch.motorola.datawedge.ACTION");
+				datawedge.start();
 				alert("DataWedge");
 			}
 
@@ -135,13 +135,6 @@
 				$( '#scan3' ).on( 'click touch', function(e) {
 
 					e.preventDefault();
-					
-					datawedge.startScanner(function(data){
-						var labelType = data.type,
-						barcode   = data.barcode;
-
-						alert("Barcode scanned.  Label type is: " + labelType + ", " + barcode);
-					});
 					
 					datawedge.registerForBarcode(function(data){
 						var labelType = data.type,
