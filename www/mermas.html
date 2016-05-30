@@ -137,7 +137,7 @@
 
 					datawedge.registerForBarcode(function(data){
 						var labelType = data.type,
-						var barcode   = data.barcode;
+						barcode   = data.barcode;
 
 						alert("Barcode scanned.  Label type is: " + labelType + ", " + barcode);
 					});
@@ -147,7 +147,7 @@
 
 					datawedge.startScanner(function(data){
 						var labelType = data.type,
-						var barcode   = data.barcode;
+						barcode   = data.barcode;
 
 						alert("Barcode scanned.  Label type is: " + labelType + ", " + barcode);
 					});
