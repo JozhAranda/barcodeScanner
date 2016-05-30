@@ -110,17 +110,14 @@
       	function onDeviceReady() {
 
 			if (window.datawedge) {
-				datawedge.start();
-				datawedge.start("com.motorolasolutions.emdk.datawedge.DWDEMO");
+				datawedge.start("com.bluefletch.motorola.datawedge.ACTION");
 				alert("DataWedge");
 			}
 
 			$(function() {
           		$( '#scan2' ).on( 'click touch', function(e) {
 
-					alert("Barcode");
-				
-          			e.preventDefault();
+					e.preventDefault();
 	            	cordova.plugins.barcodeScanner.scan(
 	              		function (result) {
 	                		alert("We got a barcode\n" +
@@ -137,9 +134,14 @@
 				
 				$( '#scan3' ).on( 'click touch', function(e) {
 
-					alert("DataWedge2");
-					
 					e.preventDefault();
+					
+					datawedge.startScanner(function(data){
+						var labelType = data.type,
+						barcode   = data.barcode;
+
+						alert("Barcode scanned.  Label type is: " + labelType + ", " + barcode);
+					});
 					
 					datawedge.registerForBarcode(function(data){
 						var labelType = data.type,
