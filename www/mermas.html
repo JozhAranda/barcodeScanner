@@ -112,13 +112,13 @@
 
 			if (window.datawedge) {
 				datawedge.start();
-				alert("DataWedge");
 			}
 
 			$(function() {
           		$( '#scan2' ).on( 'click touch', function(e) {
 
 					e.preventDefault();
+					
 	            	cordova.plugins.barcodeScanner.scan(
 	              		function (result) {
 	                		alert("We got a barcode\n" +
