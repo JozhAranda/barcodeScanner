@@ -135,7 +135,7 @@
 				
 				$( '#scan3' ).on( 'click touch', function() {
 
-					datawedge.startScanner(function(data){
+					datawedge.registerForBarcode(function(data){
 						var labelType = data.type,
 						var barcode   = data.barcode;
 
