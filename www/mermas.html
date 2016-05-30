@@ -72,6 +72,7 @@
 				<div class="col-xs-8 col-xs-offset-2">
 					<button class="btn btn-primary btn-sm btn-block" id="scan">C&oacute;digo de barras</button>
 					<button class="btn btn-warning btn-sm btn-block" id="scan2">C&oacute;digo de barras</button>
+					<button class="btn btn-danger btn-sm btn-block" id="scan3">C&oacute;digo de barras</button>
 					<input type="button" value="Scan Barcode" id="scan4" class="btn btn-success btn-sm btn-block"/>   
 					<input type="button" value="Scan Barcode" onclick="scanner.startScanning()" class="btn btn-info btn-sm btn-block"/>   
 				</div>
@@ -110,7 +111,7 @@
       	function onDeviceReady() {
 
 			if (window.datawedge) {
-				datawedge.start();
+				datawedge.start("com.bluefletch.motorola.datawedge.ACTION");
 			}
 
 			$(function() {
@@ -129,6 +130,18 @@
 	                		alert("Scanning failed: " + error);
 	              		});
 	          		}
+          		);
+				
+          		$( '#scan3' ).on( 'click touch', function(e) {
+
+					e.preventDefault();
+					
+					datawedge.registerForBarcode(function(data){
+						var labelType = data.type;
+						var barcode   = data.barcode;
+
+						alert("Barcode scanned.  Label type is: " + labelType + ", " + barcode);
+					});
           		);
 				
 				$( '#scan4' ).on( 'click touch', function() {
