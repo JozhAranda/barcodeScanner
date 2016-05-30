@@ -47,11 +47,11 @@
 				<div class="col-xs-12">
 					<div class="col-xs-6 col-6">
 						<label># Unidad</label>
-						<input type="text" class="form-control" name="Unidad" pattern="^[a-zA-Z][0-9-]{1,8}$" maxlength="8" value="P-045" />
+						<input type="text" class="form-control" id="Unidadx" name="Unidad" pattern="^[a-zA-Z][0-9-]{1,8}$" maxlength="8" value="P-045" />
 					</div>
 					<div class="col-xs-6 col-6 pull-right">
 						<label>Ruta</label>
-						<input type="text" class="form-control" name="Ruta" pattern="^[0-9]{1,4}$" maxlength="4" value="14"/>
+						<input type="text" class="form-control" id="Rutax" name="Ruta" pattern="^[0-9]{1,4}$" maxlength="4" value="14"/>
 					</div>
 				</div>
 				<div class="col-xs-12">
@@ -110,7 +110,7 @@
       	function onDeviceReady() {
 
 			if (window.datawedge) {
-				datawedge.start("com.bluefletch.motorola.datawedge.ACTION");
+				datawedge.start();
 			}
 
 			$(function() {
@@ -134,13 +134,13 @@
 				$( '#scan4' ).on( 'click touch', function() {
 
 					datawedge.startScanner(function(data){
-						var labelType = data.type,
-						barcode   = data.barcode;
+						alert(data);
+						var labelType = data.type;
+						$( '#Unidadx' ).val(data.type);
+						var barcode   = data.barcode;
+						$( '#Unidadx' ).val(data.barcode);
 
 						alert("Barcode scanned.  Label type is: " + labelType + ", " + barcode);
-					}, 
-					function (error) {
-						alert("Scanning failed: " + error);
 					});
 				});
 
