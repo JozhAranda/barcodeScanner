@@ -72,7 +72,7 @@
 				<div class="col-xs-8 col-xs-offset-2">
 					<button class="btn btn-primary btn-sm btn-block" id="scan">C&oacute;digo de barras</button>
 					<button class="btn btn-warning btn-sm btn-block" id="scan2">C&oacute;digo de barras</button>
-					<button class="btn btn-danger btn-sm btn-block" id="scan2">C&oacute;digo de barras</button>
+					<button class="btn btn-danger btn-sm btn-block" id="scan3">C&oacute;digo de barras</button>
 					<input type="button" value="Scan Barcode" onclick="scanner.startScanning()" class="btn btn-info btn-sm btn-block"/>   
 				</div>
 			</div>
@@ -110,12 +110,16 @@
       	function onDeviceReady() {
 
 			if (window.datawedge) {
+				datawedge.start();
 				datawedge.start("com.motorolasolutions.emdk.datawedge.DWDEMO");
+				alert("DataWedge");
 			}
 
 			$(function() {
           		$( '#scan2' ).on( 'click touch', function(e) {
 
+					alert("Barcode");
+				
           			e.preventDefault();
 	            	cordova.plugins.barcodeScanner.scan(
 	              		function (result) {
@@ -131,7 +135,9 @@
 					
           		);
 				
-				$( '#scan3' ).on( 'click touch'm function(e) {
+				$( '#scan3' ).on( 'click touch', function(e) {
+
+					alert("DataWedge2");
 					
 					e.preventDefault();
 					
