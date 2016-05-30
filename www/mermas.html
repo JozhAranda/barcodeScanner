@@ -133,13 +133,11 @@
 					
           		);
 				
-				$( '#scan3' ).on( 'click touch', function(e) {
+				$( '#scan3' ).on( 'click touch', function() {
 
-					e.preventDefault();
-					
-					datawedge.registerForBarcode(function(data){
+					datawedge.startScanner(function(data){
 						var labelType = data.type,
-						barcode   = data.barcode;
+						var barcode   = data.barcode;
 
 						alert("Barcode scanned.  Label type is: " + labelType + ", " + barcode);
 					});
