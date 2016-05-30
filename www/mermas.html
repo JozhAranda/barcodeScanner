@@ -74,7 +74,7 @@
 					<button class="btn btn-warning btn-sm btn-block" id="scan2">C&oacute;digo de barras</button>
 					<button class="btn btn-danger btn-sm btn-block" id="scan3">C&oacute;digo de barras</button>
 					<input type="button" value="Scan Barcode" onclick="scanner.startScanning()" class="btn btn-info btn-sm btn-block"/>   
-					<input type="button" value="Scan Barcode" onclick="datawedge.startScanner()" class="btn btn-success btn-sm btn-block"/>   
+					<input type="button" value="Scan Barcode" id="scan4" class="btn btn-success btn-sm btn-block"/>   
 				</div>
 			</div>
 			<div class="col-xs-12" style="margin-top: 25px;">
@@ -136,6 +136,16 @@
 				$( '#scan3' ).on( 'click touch', function() {
 
 					datawedge.registerForBarcode(function(data){
+						var labelType = data.type,
+						var barcode   = data.barcode;
+
+						alert("Barcode scanned.  Label type is: " + labelType + ", " + barcode);
+					});
+				});
+				
+				$( '#scan4' ).on( 'click touch', function() {
+
+					datawedge.startScanner(function(data){
 						var labelType = data.type,
 						var barcode   = data.barcode;
 
