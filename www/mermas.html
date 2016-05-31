@@ -71,10 +71,7 @@
 			<div class="col-xs-12" style="margin-top: 25px;">
 				<div class="col-xs-8 col-xs-offset-2">
 					<button class="btn btn-primary btn-sm btn-block" id="scan">C&oacute;digo de barras</button>
-					<button class="btn btn-warning btn-sm btn-block" id="scan2">C&oacute;digo de barras</button>
-					<button class="btn btn-danger btn-sm btn-block" id="scan3">C&oacute;digo de barras</button>
-					<input type="button" value="Scan Barcode" id="scan4" class="btn btn-success btn-sm btn-block"/>   
-					<input type="button" value="Scan Barcode" onclick="scanner.startScanning()" class="btn btn-info btn-sm btn-block"/>   
+					<input type="button" value="Scan Barcode" id="scan2" class="btn btn-success btn-sm btn-block"/>    
 				</div>
 			</div>
 			<div class="col-xs-12" style="margin-top: 25px;">
@@ -114,80 +111,10 @@
 						
 				if (window.datawedge) { datawedge.start(); }
 			
-				/*******************************/
-				   datawedge.registerForBarcode(function(data){
-					   var labelType = data.type,
-						   barcode   = data.barcode;
+          		$( '#scan2' ).on( 'click touch', function() {
 
-					   alert("Barcode scanned.  Label type is: " + labelType + ", " + barcode);
-
-					   //TODO: handle barcode/label type
-				   });
-				   //This function will be passed an array with the read values for each track.  
-				   //NOTE: If a track could not be read, it will contain null
-				   datawedge.registerForMagstripe(function(tracks){
-					   var track1, track2;
-					   alert("read magstripe value : " + JSON.stringify(tracks));
-
-					   //read track 1
-					   if (tracks[0]) {
-						  //track 1 uses carets as dividers
-						  track1 = tracks[0].split('^');
-
-						  var cc = {
-							 number : track1[0].substr(2), //strip leading %B
-							 name : track1[1].trim(),
-							 expr : '20' + track1[2].substr(0,2) + '-' + track1[2].substr(2,2)
-						  };
-
-						  //TODO: handle track 1
-					   } 
-					   else if (tracks[1]) {
-						  track2 = tracks[1];
-
-						  //TODO: handle track 2
-					   } 
-					   else {
-						  //ERROR: track 3 almost never has anything in it
-					   }
-					});
-				/*******************************/			
-			
-			
-          		$( '#scan2' ).on( 'click touch', function(e) {
-
-					e.preventDefault();
-					
-	            	cordova.plugins.barcodeScanner.scan(
-	              		function (result) {
-	                		alert("We got a barcode\n" +
-	                  			"Result: " + result.text + "\n" +
-	                  			"Format: " + result.format + "\n" +
-	                  			"Cancelled: " + result.cancelled);
-	              		}, 
-	              		function (error) {
-	                		alert("Scanning failed: " + error);
-	              		});
-	          		}
-          		);
+					datawedge.start();
 				
-          		$( '#scan3' ).on( 'click touch', function(e) {
-
-					e.preventDefault();
-					
-					datawedge.registerForBarcode(function(data){
-						alert(data);
-						var labelType = data.type;
-						$( '#Unidadx' ).val(data.type);
-						var barcode   = data.barcode;
-						$( '#Unidadx' ).val(data.barcode);
-
-						alert("Barcode scanned.  Label type is: " + labelType + ", " + barcode);
-					});
-          		});
-				
-				$( '#scan4' ).on( 'click touch', function() {
-
 					datawedge.startScanner(function(data){
 						alert(data);
 						var labelType = data.type;
