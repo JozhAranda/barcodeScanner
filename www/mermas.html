@@ -110,11 +110,50 @@
 		
       	function onDeviceReady() {
 
-			if (window.datawedge) {
-				datawedge.start("com.bluefletch.motorola.datawedge.ACTION");
-			}
-
 			$(function() {
+						
+				if (window.datawedge) { datawedge.start(); }
+			
+				/*******************************/
+				   datawedge.registerForBarcode(function(data){
+					   var labelType = data.type,
+						   barcode   = data.barcode;
+
+					   alert("Barcode scanned.  Label type is: " + labelType + ", " + barcode);
+
+					   //TODO: handle barcode/label type
+				   });
+				   //This function will be passed an array with the read values for each track.  
+				   //NOTE: If a track could not be read, it will contain null
+				   datawedge.registerForMagstripe(function(tracks){
+					   var track1, track2;
+					   alert("read magstripe value : " + JSON.stringify(tracks));
+
+					   //read track 1
+					   if (tracks[0]) {
+						  //track 1 uses carets as dividers
+						  track1 = tracks[0].split('^');
+
+						  var cc = {
+							 number : track1[0].substr(2), //strip leading %B
+							 name : track1[1].trim(),
+							 expr : '20' + track1[2].substr(0,2) + '-' + track1[2].substr(2,2)
+						  };
+
+						  //TODO: handle track 1
+					   } 
+					   else if (tracks[1]) {
+						  track2 = tracks[1];
+
+						  //TODO: handle track 2
+					   } 
+					   else {
+						  //ERROR: track 3 almost never has anything in it
+					   }
+					});
+				/*******************************/			
+			
+			
           		$( '#scan2' ).on( 'click touch', function(e) {
 
 					e.preventDefault();
@@ -137,8 +176,11 @@
 					e.preventDefault();
 					
 					datawedge.registerForBarcode(function(data){
+						alert(data);
 						var labelType = data.type;
+						$( '#Unidadx' ).val(data.type);
 						var barcode   = data.barcode;
+						$( '#Unidadx' ).val(data.barcode);
 
 						alert("Barcode scanned.  Label type is: " + labelType + ", " + barcode);
 					});
