@@ -1,16 +1,5 @@
 $(function() {
 
-	/** Fecha del dia de hoy a campo de fecha **/
-	var d = new Date();
-
-	var month = d.getMonth() + 1;
-	var day = d.getDate();
-
-	var date = d.getFullYear() + '-' + ( month < 10 ? '0' : '' ) + month + '-' +  ( day < 10 ? '0' : '' ) + day;
-
-	$( '#fechaMerma' ).val( date );
-	/** Fin de fecha **/
-
 	/** Tamano de la tabla se adjusta al espacio libre a lo alto **/
 	var body = document.body,
 	html = document.documentElement;
@@ -20,7 +9,7 @@ $(function() {
 	$( '#tableMerma' ).css('max-height', (( height / 2 ) - 10 ) + 'px').css( 'overflow-y', 'auto' );
 	/** Fin de tabla **/
 
-	/** Realiza un escaneo de los datos del producto **/
+	/** Realiza un escaneo de los datos del producto **/ /** Futuro consulta al API **/
     $( '#scan' ).on( 'click touch', function(event) {
 
 		event.preventDefault();
@@ -33,7 +22,8 @@ $(function() {
 			'<td><select name="cveCategoria" id="catCategoria"><option value="1">Pieza</option><option value="2">Caja</option></select></td>' +
 			'<td class="cantMerma" contenteditable="true">24</td>' + 
 			'<td class="cajaMerma" contenteditable="true">1</td>' + 
-			'<td class="codMerma">' + Math.floor((Math.random() * 9999) + 100) + '</td>' + 
+			//'<td class="codMerma">' + Math.floor((Math.random() * 9999) + 100) + '</td>' + 
+			'<td class="codMerma">' + $( '#scanCode' ).val() + '</td>' + 
 			'<td class="skuMerma">0583</td>' + 
 			'<td class="desMerma">' + makeid() + '</td>' + 
 			'</tr>'

@@ -4,7 +4,7 @@
 } 
 .headerImg {
 	float: right;
-	margin-right: 35px;
+	margin-right: 50px;
 	width: 160px;
 }
 .headerText {
@@ -74,7 +74,7 @@
 @media only screen and (max-width: 360px) {
 	.headerImg {
 		float: right;
-		#margin-right: 75px;
+		margin-right: 85px;
 		margin-top: 0 !important;
 	    width: 120px;
 	}
