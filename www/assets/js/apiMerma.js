@@ -54,13 +54,12 @@ $(function() {
 		}
 	});
 
-
 	/** Realiza un escaneo de los datos del producto **/
     $( '#scan' ).on( 'click touch', function(event) {
 
 		event.preventDefault();
 
-		$( '.loader' ).fadeOut( '200' ).css( 'display', 'block' );  // Agrega el loading
+		//$( '.loader' ).fadeOut( '200' ).css( 'display', 'block' );  // Agrega el loading
 
 		var cvePlanta = localStorage.getItem('cvePlanta');
 		var scanCode = $( '#scanCode' ).val();
