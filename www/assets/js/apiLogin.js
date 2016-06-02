@@ -1,4 +1,5 @@
 $(function() {
+	
 	// Peticion AJAX para insertar la informacion capturada en Inventario
 	$( '#submitSesion' ).on( 'click touch', function(event) {
 
@@ -10,7 +11,7 @@ $(function() {
 
 		$.ajax({
 			method: 'POST',
-			//url: "http://localhost:53383/api/Sesiones/Login",
+			url: "http://cdfds1/Mermas/api/Sesiones/Login",
 			async: true,
 			crossDomain: true,
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -35,7 +36,6 @@ $(function() {
 		        		localStorage.setItem('cveCedis', data.Data[0].cveCedis); // Se agrega el cveCedis al localStorage
 		        		localStorage.setItem('Imei', $( '#imei' ).val()); // Se agrega elimei al localSotrage
 
-		        		//localStorage.removeItem('key'); // Se elimina el valor del localStorage
 		        		$( 'body' ).load( 'mermas.html' ).hide().fadeIn(1500).delay(6000);
 		        		window.location.href = "mermas.html";
 			        }
@@ -45,7 +45,7 @@ $(function() {
 			        }
 			        else {
 						$.snackbar({
-							content: data.Data[0].Output, 
+							content: data.Data, 
 							timeout: 5000
 						}); 
 			        }

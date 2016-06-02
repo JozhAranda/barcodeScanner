@@ -4,7 +4,7 @@ $(function() {
 
 	// Realiza una consulta al API para traer la planta
 	var cvePlanta = localStorage.getItem('cvePlanta');
-	$.get('http://localhost:53383/api/Mermas/Plantas', function(element) {
+	$.get('http://cdfds1/Mermas/api/Mermas/Plantas', function(element) {
 
 		for (var i = 0; i < element.length; i++) {
 
@@ -17,7 +17,7 @@ $(function() {
 
 	// Realiza una consulta al API para traer el cedis	
 	var cveCedis = localStorage.getItem('cveCedis');
-	$.get('http://localhost:53383/api/Mermas/Cedis/' + cvePlanta, function(element) {
+	$.get('http://cdfds1/Mermas/api/Mermas/Cedis/' + cvePlanta, function(element) {
 		
 		for (var i = 0; i < element.length; i++) {
 
@@ -32,7 +32,7 @@ $(function() {
 	});
 
 	// Realiza una consulta al API para traer las rutas por el cedis
-	$.get('http://localhost:53383/api/Mermas/Rutas/' + cveCedis, function(element) {
+	$.get('http://cdfds1/Mermas/api/Mermas/Rutas/' + cveCedis, function(element) {
 
 		var catRuta = $( '#catRuta' );
 		    
@@ -44,7 +44,7 @@ $(function() {
 
 	// Realiza una consulta al API para traer las unidades por el cedis
 	var lCedis = localStorage.getItem('lCedis');
-	$.get('http://localhost:53383/api/Mermas/Unidades/' + lCedis, function(element) {
+	$.get('http://cdfds1/Mermas/api/Mermas/Unidades/' + lCedis, function(element) {
 		
 		var catUnidad = $( '#catUnidad' );
 		    
@@ -64,7 +64,7 @@ $(function() {
 		var cvePlanta = localStorage.getItem('cvePlanta');
 		var scanCode = $( '#scanCode' ).val();
 		
-		$.get( 'http://localhost:53383/api/Mermas/Catalogos/' + cvePlanta + '?codigo=' + scanCode, function(element) {
+		$.get('http://cdfds1/Mermas/api/Mermas/Catalogos/' + cvePlanta + '?codigo=' + scanCode, function(element) {
 					
 			if(element.length <= 0) {
 				$.snackbar({
@@ -88,6 +88,8 @@ $(function() {
 				);
 			}
 
+			$( '#scanCode' ).val("");
+
 			$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' );  // Quita el loading
 		});
 	});
@@ -108,7 +110,7 @@ $(function() {
 
 		$.ajax({
 			method: 'POST',
-			url: "http://localhost:53383/api/Mermas/Mermas",
+			url: "http://cdfds1/Mermas/api/Mermas/Mermas",
 			async: true,
 			crossDomain: true,
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -146,7 +148,6 @@ $(function() {
 					}); 
         			$( '#guardarMerma' ).text( 'Guardar' );	        	
 		        }
-		        console.log(data);
 			},
 			error : function(xhr, textStatus, errorThrown ) {
 				if (textStatus === 'timeout') {

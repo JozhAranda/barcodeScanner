@@ -1,16 +1,5 @@
 $(function() {
 
-	/** Fecha del dia de hoy a campo de fecha **/
-	var d = new Date();
-
-	var month = d.getMonth() + 1;
-	var day = d.getDate();
-
-	var date = d.getFullYear() + '-' + ( month < 10 ? '0' : '' ) + month + '-' +  ( day < 10 ? '0' : '' ) + day;
-
-	//$( '#fechaMerma' ).val( date );
-	/** Fin de fecha **/
-
 	/** Tamano de la tabla se adjusta al espacio libre a lo alto **/
 	var body = document.body,
 	html = document.documentElement;
