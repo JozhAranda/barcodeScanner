@@ -82,7 +82,7 @@ $(function() {
 
 		event.preventDefault();
 
-		//$( '.loader' ).fadeOut( '200' ).css( 'display', 'block' );  // Agrega el loading
+		$( '.loader' ).fadeOut( '200' ).css( 'display', 'block' );  // Agrega el loading
 
 		var cvePlanta = localStorage.getItem('cvePlanta');
 		var scanCode = $( '#scanCode' ).val();
@@ -129,6 +129,8 @@ $(function() {
 
 		var my_delay = 2000; // Se asigna un delay (espera de tiempo)
 
+		console.log(datosForm);
+		
 		document.activeElement.blur(); // Oculta el teclado
 
 		$.ajax({

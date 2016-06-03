@@ -13,10 +13,8 @@ $(function() {
     var token = localStorage.getItem('token'); // Se obtiene el valor del localStorage
     var user = localStorage.getItem('user'); // Se obtiene el valor del localStorage
     var imei = localStorage.getItem('imei'); // Se obtiene el valor del localStorage
-    var cvePlanta = localStorage.getItem('cvePlanta'); // Se obtiene el valor del localStorage
-    var cveCedis = localStorage.getItem('cveCedis'); // Se obtiene el valor del localStorage
 	
-	if(token != null && user != null && cvePlanta != null && cveCedis != null) {
+	if(token != null && user != null) {
 
 		$( '#usuarioMerma' ).val(user);
 		$( '#imeiMerma' ).val(imei);
