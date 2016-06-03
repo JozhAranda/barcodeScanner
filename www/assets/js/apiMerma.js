@@ -2,56 +2,79 @@ $(function() {
 
 	$( '.loader' ).fadeOut( '200' ).css( 'display', 'block' );  // Agrega el loading
 
-	// Realiza una consulta al API para traer la planta
-	var cvePlanta = localStorage.getItem('cvePlanta');
+	// Se asigna los valor localStorage a una variable
+	var user = localStorage.getItem('user');
+	var plantas = localStorage.getItem('planta');
+	var cedis = localStorage.getItem('cedis');
+
+	// Realiza una consulta al API para traer las plantas
 	$.get('http://cdfds1/Mermas/api/Mermas/Plantas', function(element) {
 
-		for (var i = 0; i < element.length; i++) {
-
-			if(element[i].cvePlanta == cvePlanta) {
-				$( '#plantaMerma' ).val(element[i].Planta);
-				break;
-			}
-		}
-	});
-
-	// Realiza una consulta al API para traer el cedis	
-	var cveCedis = localStorage.getItem('cveCedis');
-	$.get('http://cdfds1/Mermas/api/Mermas/Cedis/' + cvePlanta, function(element) {
+		var catPlantas = $( '#catPlantas' );
+		var arrayPlanta = plantas.split("-");
 		
 		for (var i = 0; i < element.length; i++) {
 
-			if(element[i].cveCedis == cveCedis) {
-				$( '#cedisMerma' ).val(element[i].Bodega);
-				localStorage.setItem('lCedis', element[0].LBodega); // Se agrega el LBodega al localStorage	
-				break;
+			if (arrayPlanta.indexOf(element[i].cvePlanta.toString()) > -1) {
+
+				catPlantas.append("<option value='" + element[i].cvePlanta + "'>" + element[i].Planta + "</option>");
 			}
 		}
 
 		$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' ); // Quita el loading
+	});	
+
+	// Realiza una consulta al API para traer los cedis
+	$( '#catPlantas' ).on( 'change', function(e) {
+
+		localStorage.setItem('cvePlanta', $(this).val());
+
+		$.get('http://cdfds1/Mermas/api/Mermas/Cedis/' + $(this).val(), function(element) {
+			
+			var catCedis = $( '#catCedis' );
+			var arrayCedis = cedis.split("-");
+
+			for (var i = 0; i < element.length; i++) {
+
+				if(arrayCedis.indexOf(element[i].cveCedis.toString()) > -1) {
+
+					catCedis.append("<option value='" + element[i].cveCedis + "' alt='" + element[i].LBodega + "'>" + element[i].Bodega + "</option>");
+				}
+			}
+		});
 	});
 
 	// Realiza una consulta al API para traer las rutas por el cedis
-	$.get('http://cdfds1/Mermas/api/Mermas/Rutas/' + cveCedis, function(element) {
+	$( '#catCedis' ).on('change', function(e) {
 
-		var catRuta = $( '#catRuta' );
-		    
-		for (var i = 0; i < element.length; i++) {
+		$( '.loader' ).fadeOut( '200' ).css( 'display', 'block' );  // Agrega el loading
 
-			catRuta.append("<option value='" + element[i].cveRuta + "'>" + element[i].Ruta + "</option>");
-		}
-	});
-
-	// Realiza una consulta al API para traer las unidades por el cedis
-	var lCedis = localStorage.getItem('lCedis');
-	$.get('http://cdfds1/Mermas/api/Mermas/Unidades/' + lCedis, function(element) {
+		var cedis = $(this).val();
+		var lCedis = $('#catCedis option:selected').attr('alt');
 		
-		var catUnidad = $( '#catUnidad' );
-		    
-		for (var i = 0; i < element.length; i++) {
+		$.get('http://cdfds1/Mermas/api/Mermas/Rutas/' + cedis, function(element) {
 
-			catUnidad.append("<option value='" + element[i].Unidad + "'>" + element[i].Unidad + "</option>");
-		}
+			var catRuta = $( '#catRuta' );
+			    
+			for (var i = 0; i < element.length; i++) {
+
+				catRuta.append("<option value='" + element[i].Ruta + "'>" + element[i].Ruta + "</option>");
+			}
+		});
+
+		// Realiza una consulta al API para traer las unidades por el cedis
+		$.get('http://cdfds1/Mermas/api/Mermas/Unidades/' + lCedis, function(element) {
+			
+			var catUnidad = $( '#catUnidad' );
+			    
+			for (var i = 0; i < element.length; i++) {
+
+				catUnidad.append("<option value='" + element[i].Unidad + "'>" + element[i].Unidad + "</option>");
+			}
+		});	
+
+		$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' ); // Quita el loading	
+			
 	});
 
 	/** Realiza un escaneo de los datos del producto **/
