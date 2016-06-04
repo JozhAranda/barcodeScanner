@@ -1,4 +1,10 @@
 $(function() {
+
+	if(localStorage.getItem('user') != null) {
+		
+		$( 'body' ).load( 'mermas.html' ).hide().fadeIn(1500).delay(6000);
+		window.location.href = "mermas.html";
+	}
 	
 	// Peticion AJAX para insertar la informacion capturada en Inventario
 	$( '#submitSesion' ).on( 'click touch', function(event) {
