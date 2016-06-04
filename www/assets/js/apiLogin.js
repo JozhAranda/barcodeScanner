@@ -11,7 +11,7 @@ $(function() {
 
 		$.ajax({
 			method: 'POST',
-			url: "http://cdfds1/Mermas/api/Sesiones/Login",
+			url: "http://10.1.0.13/Mermas/api/Sesiones/Login",
 			async: true,
 			crossDomain: true,
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',

@@ -8,7 +8,7 @@ $(function() {
 	var cedis = localStorage.getItem('cedis');
 
 	// Realiza una consulta al API para traer las plantas
-	$.get('http://cdfds1/Mermas/api/Mermas/Plantas', function(element) {
+	$.get('http://10.1.0.13/Mermas/api/Mermas/Plantas', function(element) {
 
 		var catPlantas = $( '#catPlantas' );
 		var arrayPlanta = plantas.split("-");
@@ -29,7 +29,7 @@ $(function() {
 
 		localStorage.setItem('cvePlanta', $(this).val());
 
-		$.get('http://cdfds1/Mermas/api/Mermas/Cedis/' + $(this).val(), function(element) {
+		$.get('http://10.1.0.13/Mermas/api/Mermas/Cedis/' + $(this).val(), function(element) {
 			
 			var catCedis = $( '#catCedis' );
 			var arrayCedis = cedis.split("-");
@@ -52,7 +52,7 @@ $(function() {
 		var cedis = $(this).val();
 		var lCedis = $('#catCedis option:selected').attr('alt');
 		
-		$.get('http://cdfds1/Mermas/api/Mermas/Rutas/' + cedis, function(element) {
+		$.get('http://10.1.0.13/Mermas/api/Mermas/Rutas/' + cedis, function(element) {
 
 			var catRuta = $( '#catRuta' );
 			    
@@ -63,7 +63,7 @@ $(function() {
 		});
 
 		// Realiza una consulta al API para traer las unidades por el cedis
-		$.get('http://cdfds1/Mermas/api/Mermas/Unidades/' + lCedis, function(element) {
+		$.get('http://10.1.0.13/Mermas/api/Mermas/Unidades/' + lCedis, function(element) {
 			
 			var catUnidad = $( '#catUnidad' );
 			    
@@ -87,7 +87,7 @@ $(function() {
 		var cvePlanta = localStorage.getItem('cvePlanta');
 		var scanCode = $( '#scanCode' ).val();
 		
-		$.get('http://cdfds1/Mermas/api/Mermas/Catalogos/' + cvePlanta + '?codigo=' + scanCode, function(element) {
+		$.get('http://10.1.0.13/Mermas/api/Mermas/Catalogos/' + cvePlanta + '?codigo=' + scanCode, function(element) {
 					
 			if(element.length <= 0) {
 				$.snackbar({
@@ -135,7 +135,7 @@ $(function() {
 
 		$.ajax({
 			method: 'POST',
-			url: "http://cdfds1/Mermas/api/Mermas/Mermas",
+			url: "http://10.1.0.13/Mermas/api/Mermas/Mermas",
 			async: true,
 			crossDomain: true,
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
