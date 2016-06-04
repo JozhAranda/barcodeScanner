@@ -40,8 +40,10 @@
 				<div class="col-xs-12">
 					<div class="col-xs-6">
 						<label>Fecha</label>
-						<div class="bfh-datepicker" data-format="d/m/y" data-name="FechaLote" id="fechaMerma" data-max="today" style="background: #fff;"></div>
+						<!--div class="bfh-datepicker" data-format="d/m/y" data-name="FechaLote" id="fechaMerma" data-max="today" style="background: #fff;"></div-->
+						<input type="date" name="FechaLote" id="fechaMerma" class="form-control" required />
 						<input type="hidden" name="Usuario" id="usuarioMerma" />
+						<input type="hidden" name="Imei" id="ImeiMerma" />
 						<input type="hidden" name="cveInventario" value="1" />
 						<input type="hidden" name="cveTipo" value="1" />
 					</div>
@@ -49,13 +51,13 @@
 				<div class="col-xs-12">
 					<div class="col-xs-6 col-6">
 						<label>Planta</label>
-						<select name="cvePlanta" id="catPlantas" class="form-control" required>
+						<select name="cvePlanta" id="catPlantas" class="form-control" style="height: 40px;" required>
 							<option value="">Selecciona una planta</option>
 						</select>
 					</div>
 					<div class="col-xs-6 col-6 pull-right">
 						<label>Cedis</label>
-						<select name="cveCedis" id="catCedis" class="form-control" required>
+						<select name="cveCedis" id="catCedis" class="form-control" style="height: 40px;" required>
 							<option value="">Selecciona un cedis</option>
 						</select>
 					</div>
@@ -63,13 +65,13 @@
 				<div class="col-xs-12">
 					<div class="col-xs-6 col-6">
 						<label># Unidad</label>
-						<select name="Unidad" id="catUnidad" class="form-control" required>
+						<select name="Unidad" id="catUnidad" class="form-control" style="height: 40px;" required>
 							<option value="">Selecciona una unidad</option>
 						</select>
 					</div>
 					<div class="col-xs-6 col-6 pull-right">
 						<label>Ruta</label>
-						<select name="Ruta" id="catRuta" class="form-control" required>
+						<select name="Ruta" id="catRuta" class="form-control" style="height: 40px;" required>
 							<option value="">Selecciona una ruta</option>
 						</select>
 					</div>
@@ -79,18 +81,13 @@
 			<div class="col-xs-12" style="margin-top: 15px;">
 				<div class="col-xs-12">
 					<div class="input-group">
-						<input type="text" id="scanCode" class="form-control" placeholder="Toca y escanea el c&oacute;digo de barras" />
+						<input type="number" id="scanCode" class="form-control" placeholder="Toca y escanea el c&oacute;digo de barras" />
 						<span class="input-group-btn">
 							<button type="button" id="scan" class="btn btn-primary btn-block" style="font-size: 12px;padding: 10px 12px;background: #607D8B;border-color: #607D8B;">Consultar</button>
 						</span>
 					</div>
 				</div>
 			</div>
-			<!--div class="col-xs-12" style="margin-top: 25px;">
-				<div class="col-xs-8 col-xs-offset-2">
-					<input type="button" value="Scan Barcode" id="scan2" class="btn btn-success btn-sm btn-block"/>    
-				</div>
-			</div-->
 			<div class="col-xs-12" style="margin-top: 15px;">
 				<div class="table-responsive" id="tableMerma">
 					<table class="table table-striped table-bordered">
@@ -129,6 +126,7 @@
   		        document.addEventListener("backbutton", function (e) {
 		            e.preventDefault();
 		        }, false );
+				
         	});
 
       	}

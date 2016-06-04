@@ -127,7 +127,7 @@ $(function() {
 		
 		var datosForm = $( '#formMerma' ).serialize(); // Trae todos los valores dentro del form
 
-		var my_delay = 2000; // Se asigna un delay (espera de tiempo)
+		var my_delay = 1500; // Se asigna un delay (espera de tiempo)
 
 		console.log(datosForm);
 		

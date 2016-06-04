@@ -38,6 +38,11 @@ table tr td:first-child::before {
 	z-index: 9999;
 	display: none;
 	background: url('../img/loading.svg') 50% 50% no-repeat rgba(250, 250, 250, 0.7);
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }	
 @media screen and (max-width: 480px) {
 	.col-xs-6 {
