@@ -43,6 +43,18 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+#menuLeft {
+	height: 415px;
+	width: 145px;
+	overflow: hidden;
+	display: none;
+	background: rgb(38, 50, 56);
+	position: absolute;
+	z-index: 999;
+	margin-left: -15px;
+	margin-top: -10px;
+	border: 0;
 }	
 @media screen and (max-width: 480px) {
 	.col-xs-6 {

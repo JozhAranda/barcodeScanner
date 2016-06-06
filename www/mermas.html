@@ -23,7 +23,7 @@
 				<div class="navbar-header">
 					<div class="col-xs-12" style="margin: 0;padding: 0;">
 						<div class="col-xs-6 col-6">
-							<p style="font-weight: 700;color: #fff;font-size: 18px;padding: 10px 0 0 10px;">Merma</span>
+							<p style="font-weight: 700;color: #fff;font-size: 18px;padding: 10px 0 0 10px;" id="slideLeft">Merma</p>
 						</div>
 						<div class="col-xs-6 col-6" style="padding: 7px 0;">
 							<button type="submit" id="guardarMerma" class="btn btn-sm btn-info pull-right" style="font-weight: 700;background: #263238;border-color: #263238;">Guardar</button>
@@ -35,6 +35,10 @@
 	</header>
 	<div class="container">
 		<div class="loader"></div>
+		<div class="nav" id="menuLeft">
+			<p class="text-center" id="usuarioText" style="color: #eee;margin-top: 20px;font-weight: 700;"></p>
+			<a href="#" id="logout" class="btn btn-block" style="background: rgb(38, 50, 56);border: 0;color: #eee;">Cerrar sesión</a>
+		</div>
 		<div class="row">
 			<form class="form" role="form" id="formMerma">
 				<div class="col-xs-12">
@@ -50,28 +54,28 @@
 				<div class="col-xs-12">
 					<div class="col-xs-6 col-6">
 						<label>Planta</label>
-						<select name="cvePlanta" id="catPlantas" class="form-control" style="height: 50px !important;" required>
-							<option value="">Selecciona una planta</option>
+						<select name="cvePlanta" id="catPlantas" class="form-control" required>
+							<option value="" style="min-height: 39px !important;">Selecciona una planta</option>
 						</select>
 					</div>
 					<div class="col-xs-6 col-6 pull-right">
 						<label>Cedis</label>
-						<select name="cveCedis" id="catCedis" class="form-control" style="height: 50px !important;" required>
-							<option value="">Selecciona un cedis</option>
+						<select name="cveCedis" id="catCedis" class="form-control" required>
+							<option value="" style="min-height: 39px !important;">Selecciona un cedis</option>
 						</select>
 					</div>
 				</div>
 				<div class="col-xs-12">
 					<div class="col-xs-6 col-6">
 						<label># Unidad</label>
-						<select name="Unidad" id="catUnidad" class="form-control" style="height: 50px !important;" required>
-							<option value="">Selecciona una unidad</option>
+						<select name="Unidad" id="catUnidad" class="form-control" required>
+							<option value="" style="min-height: 39px !important;">Selecciona una unidad</option>
 						</select>
 					</div>
 					<div class="col-xs-6 col-6 pull-right">
 						<label>Ruta</label>
-						<select name="Ruta" id="catRuta" class="form-control" style="height: 50px !important;" required>
-							<option value="">Selecciona una ruta</option>
+						<select name="Ruta" id="catRuta" class="form-control" required>
+							<option value="" style="min-height: 39px !important;">Selecciona una ruta</option>
 						</select>
 					</div>
 				</div>
