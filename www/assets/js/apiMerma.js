@@ -94,6 +94,11 @@ $(function() {
 
 		event.preventDefault();
 
+     	if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57) && event.ctrlKey != true) {				    
+	    	var slicer =  $(this);
+	    	slicer.val(slicer.slice(0, -1));
+		}
+
 		var count = $(this).val().length;
 
 		if(count >= 12) {
