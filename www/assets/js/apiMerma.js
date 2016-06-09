@@ -107,12 +107,19 @@ $(function() {
 						
 				// Crea un nuevo row en la tabla de datosMerma
 				$( '#datosMerma' ).append(
-					'<tr class="delete">' +
+					/*'<tr class="delete">' +
 					'<td class="codMerma">' + element[0].Codigo + '</td>' + 
 					'<td class="cajaMerma" contenteditable="true">1</td>' + 
 					'<td class="skuMerma">' + element[0].SKU + '</td>' + 
 					'<td class="desMerma">' + element[0].Descripcion + '</td>' + 
-					'</tr>'
+					'</tr>'*/
+				    '<div class="notice delete">'+
+			        '<strong class="codMerma">' + element[0].Codigo +
+			        '<span class="cajaMerma inC pull-right" contenteditable="true">1</span></strong>'+
+			        '<br>'+
+			        '<span class="desMerma">' + element[0].Descripcion +
+			        '<span class="skuMerma pull-right">' + element[0].SKU + '</span></span>' +
+					'</div>'
 				);
 			
 				$( '#scanCode' ).val("");

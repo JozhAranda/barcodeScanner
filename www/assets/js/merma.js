@@ -66,12 +66,16 @@ $(function() {
 });
 
 /** Remover un renglón de la tabla **/
-$(document).on('click touch', '.remove', function(e) {
+$$( '.delete' ).swipeRight(function(e) {
 
-     e.preventDefault();
+	e.preventDefault();
 
-     $(this).closest('tr').remove();
+	var r = confirm("¿Deseas eliminar el registro?");
+	if (r == true) {
+	
+		$$(this).closest('div').remove();
+	}
 
-     return false;
+	return false;      	
 });
 /** Fin de remover **/
