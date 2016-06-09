@@ -1,44 +1,56 @@
 $(function() {
 
-	/** Tamano de la tabla se adjusta al espacio libre a lo alto **/
+	/** Tamaño de la tabla se ajusta al espacio libre a lo alto **/
 	var body = document.body,
 	html = document.documentElement;
 
 	var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
 					   
-	$( '#tableMerma' ).css('max-height', (( height / 2 ) - 10 ) + 'px').css( 'overflow-y', 'auto' );
+	$( '#tableMerma' ).css('max-height', ( height / 1.5 ) + 'px').css( 'overflow-y', 'auto' );
 	/** Fin de tabla **/
 
-	/** Revisar sesion **/
+	/** Revisar sesión **/
 	if(localStorage.getItem('user') == null) {
 		
 		$( 'body' ).load( 'index.html' ).hide().fadeIn(1500).delay(6000);
 		window.location.href = "index.html";
 	}	
-	/** Fin de revision **/	
+	/** Fin de revisión **/	
 	
-	/** Cerrar sesion **/
+	/** Cerrar sesión **/
 	$( '#logout' ).on('click touch', function(e) {
 		
 		localStorage.clear();
 		
 		$( 'body' ).load( 'index.html' ).hide().fadeIn(1500).delay(6000);
-		window.location.href = "index.html";		
-		
+		window.location.href = "index.html";			
 	});
-	/** Fin sesion **/	
+	/** Fin sesión **/	
 	
-	/** Mostrar menu lateral izquierdo **/
+	/** Mostrar menú lateral izquierdo **/
 	$( '#menuLeft' ).css('height', ( height + 10 ) + 'px').css( 'overflow-y', 'auto' );
 	$( '#usuarioText' ).text(localStorage.getItem('user'));
 	
-	$("#slideLeft").on('click touch', function(e) {
+	$( '#slideLeft' ).on('click touch', function(e) {
 
-		$( '#menuLeft' ).animate({width: 'toggle'});
-		
+		$( '#menuLeft' ).animate({width: 'toggle'});		
 	});	
-	/** Fin del menu lateral izquierdo **/
+	/** Fin del menú lateral izquierdo **/
 	
+	/** Ocultar el form **/
+	$( '#slideUp' ).on('click touch', function() {
+
+		$( '#formMerma' ).slideToggle( "slow" );
+	});
+	/** Fin ocultar **/
+
+	/** Deshabilitar el input de escaneo **/
+	$( '#catUnidad' ).on('change', function(e) {
+		
+		$( '#scanCode' ).attr('disabled', false);		
+	});
+	/** Fin del deshabilitar **/
+
     /**  Revisar existencia de token para seguir en app **/
     var token = localStorage.getItem('token'); // Se obtiene el valor del localStorage
     var user = localStorage.getItem('user'); // Se obtiene el valor del localStorage
@@ -48,14 +60,12 @@ $(function() {
 
 		$( '#usuarioMerma' ).val(user);
 		$( '#imeiMerma' ).val(imei);
-		$( '#cvePlantaMerma' ).val(cvePlanta);
-		$( '#cveCedisMerma' ).val(cveCedis);
 	} 
 	/** Fin el token **/
 
 });
 
-/** Remover un renglon de la tabla **/
+/** Remover un renglón de la tabla **/
 $(document).on('click touch', '.remove', function(e) {
 
      e.preventDefault();

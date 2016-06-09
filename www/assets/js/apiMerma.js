@@ -44,7 +44,7 @@ $(function() {
 		});
 	});
 
-	// Realiza una consulta al API para traer las rutas por el cedis
+	// Realiza una consulta al API para traer las unidades por el cedis
 	$( '#catCedis' ).on('change', function(e) {
 
 		$( '.loader' ).fadeOut( '200' ).css( 'display', 'block' );  // Agrega el loading
@@ -52,85 +52,97 @@ $(function() {
 		var cedis = $(this).val();
 		var lCedis = $('#catCedis option:selected').attr('alt');
 		
-		$.get('http://10.1.0.13/Mermas/api/Mermas/Rutas/' + cedis, function(element) {
-
-			var catRuta = $( '#catRuta' );
-			    
-			for (var i = 0; i < element.length; i++) {
-
-				catRuta.append("<option value='" + element[i].Ruta + "'>" + element[i].Ruta + "</option>");
-			}
-		});
-
-		// Realiza una consulta al API para traer las unidades por el cedis
 		$.get('http://10.1.0.13/Mermas/api/Mermas/Unidades/' + lCedis, function(element) {
 			
 			var catUnidad = $( '#catUnidad' );
 			    
 			for (var i = 0; i < element.length; i++) {
 
-				catUnidad.append("<option value='" + element[i].Unidad + "'>" + element[i].Unidad + "</option>");
+				catUnidad.append("<option value='" + element[i].Unidad + "' alt='" + element[i].Ruta + "'>" + element[i].Unidad + "</option>");
 			}
 		});	
 
-		$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' ); // Quita el loading	
-			
+		$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' ); // Quita el loading				
 	});
 
-	/** Realiza un escaneo de los datos del producto **/
-    $( '#scan' ).on( 'click touch', function(event) {
-
-		event.preventDefault();
+	// Realiza una consulta al API para traer las rutas por el cedis y unidad
+	$( '#catUnidad' ).on('change', function(e) {
 
 		$( '.loader' ).fadeOut( '200' ).css( 'display', 'block' );  // Agrega el loading
 
-		var cvePlanta = localStorage.getItem('cvePlanta');
-		var scanCode = $( '#scanCode' ).val();
-		
-		$.get('http://10.1.0.13/Mermas/api/Mermas/Catalogos/' + cvePlanta + '?codigo=' + scanCode, function(element) {
-					
-			if(element.length <= 0) {
-				$.snackbar({
-					content: "No se encontr&oacute; informaci&oacute;n relacionada.", 
-					timeout: 5000
-				}); 
+		var cedis 	= $('#catCedis option:selected').val();
+		var unidad 	= $('#catUnidad option:selected').attr('alt'); 
+
+		$.get('http://10.1.0.13/Mermas/api/Mermas/Rutas/' + cedis, function(element) {
+
+			var catRuta = $( '#catRuta' );
+			    
+			for (var i = 0; i < element.length; i++) {
+				
+				if(element[i].Ruta == unidad) {
+
+					catRuta.append("<option value='" + element[i].Ruta + "'>" + element[i].Ruta + "</option>");
+				}
 			}
-			else {
+		});	
+
+		$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' ); // Quita el loading		
+	});
+
+	/** Realiza un escaneo de los datos del producto **/
+    $('#scanCode').keyup(function(event) {
+
+		event.preventDefault();
+
+		var count = $(this).val().length;
+
+		if(count >= 12) {
+
+			$( '.loader' ).fadeOut( '200' ).css( 'display', 'block' );  // Agrega el loading
+
+			var cvePlanta = localStorage.getItem('cvePlanta');
+			var scanCode = $( '#scanCode' ).val();
+			
+			$.get('http://10.1.0.13/Mermas/api/Mermas/Catalogos/' + cvePlanta + '?codigo=' + scanCode, function(element) {
+						
 				// Crea un nuevo row en la tabla de datosMerma
 				$( '#datosMerma' ).append(
-					'<tr>' +
-					'<td></td>' + 
-					'<td><button type="button" class="btn btn-danger btn-xs remove" style="padding: 2px 6px;">x</button></td>' +
-					'<td><select name="cveCategoria" id="catCategoria"><option value="1">Pieza</option><option value="2">Caja</option></select></td>' +
-					'<td class="cantMerma" contenteditable="true">' + element[0].Unidad + '</td>' + 
-					'<td class="cajaMerma" contenteditable="true">1</td>' + 
+					'<tr class="delete">' +
 					'<td class="codMerma">' + element[0].Codigo + '</td>' + 
+					'<td class="cajaMerma" contenteditable="true">1</td>' + 
 					'<td class="skuMerma">' + element[0].SKU + '</td>' + 
 					'<td class="desMerma">' + element[0].Descripcion + '</td>' + 
 					'</tr>'
 				);
-			}
+			
+				$( '#scanCode' ).val("");
 
-			$( '#scanCode' ).val("");
+				$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' );  // Quita el loading
 
-			$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' );  // Quita el loading
-		});
+				$( '.cajaMerma' ).keydown(function(e) {
+					if($(this).text() <= 0) {
+						$(this).text("1");
+					}
+			     	if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {				    
+				    	return false;
+				    }
+				});
+			});
+		}
 	});
     /** Fin del escaneo de los datos **/
 
-	// Peticion AJAX para insertar la informacion capturada en Inventario
+	// Petición AJAX para insertar la información capturada en Inventario
 	$( '#guardarMerma' ).on( 'click touch', function(event) {
 
-		event.preventDefault(); // Previene se haga una peticion
+		event.preventDefault(); // Previene se haga una petición
 
-		obtenerDatos(); // Funcion para obtener los datos dentro de la Tabla 
+		obtenerDatos(); // Función para obtener los datos dentro de la Tabla 
 		
 		var datosForm = $( '#formMerma' ).serialize(); // Trae todos los valores dentro del form
 
 		var my_delay = 1500; // Se asigna un delay (espera de tiempo)
 
-		console.log(datosForm);
-		
 		document.activeElement.blur(); // Oculta el teclado
 
 		$.ajax({
@@ -155,7 +167,7 @@ $(function() {
 			        		window.location.href = "mermas.html";
 				        }
 						$.snackbar({
-							content: "La informaci&oacute;n se ha guardado satisfactoriamente.", 
+							content: "La información se ha guardado satisfactoriamente.", 
 							timeout: 5000
 						}); 
 				        setTimeout(redirectFunction, my_delay);
@@ -168,7 +180,7 @@ $(function() {
 				    }
 		        } else {
 					$.snackbar({
-						content: "Ocurri&oacute; un error, al intentar guardar la informaci&oacute;n", 
+						content: "Ocurrió un error, al intentar guardar la información", 
 						timeout: 5000
 					}); 
         			$( '#guardarMerma' ).text( 'Guardar' );	        	
@@ -190,13 +202,13 @@ $(function() {
 				
 				if (xhr.status === 500) {
 					$.snackbar({
-						content: "Ocurri&oacute; un error, al comunicarse con el servidor", 
+						content: "Ocurrió un error, al comunicarse con el servidor", 
 						timeout: 5000
 					}); 
 				} 
 				else {
 					$.snackbar({
-						content: "Ocurri&oacute; un error, en la petici&oacute;n", 
+						content: "Ocurrió un error, en la petición", 
 						timeout: 5000
 					}); 
 				}
@@ -208,22 +220,17 @@ $(function() {
 	return false; 
 });
 
-// Funcion para obtener los datos dentro de la Tabla
+// Función para obtener los datos dentro de la Tabla
 function obtenerDatos() {
 
-	var cantMerma = "";
 	var cajaMerma = "";
 	var codMerma = "";
 	var skuMerma = "";
 	var desMerma = "";
 
-	$( '.cantMerma' ).each(function() {
-  		cantMerma = $(this).text(); // Se trae el texto	
-		$( '#hiddenMerma' ).append( '<input type="hidden" name="Pieza" value="'+ cantMerma +'">' ); // Se agrega una etiqueta input con el valor asignado
-	});
 	$( '.cajaMerma' ).each(function() {
   		cajaMerma = $(this).text(); // Se trae el texto	
-		$( '#hiddenMerma' ).append( '<input type="hidden" name="Caja" value="'+ cajaMerma +'">' ); // Se agrega una etiqueta input con el valor asignado
+		$( '#hiddenMerma' ).append( '<input type="hidden" name="Pieza" value="'+ cajaMerma +'">' ); // Se agrega una etiqueta input con el valor asignado
 	});
 	$( '.codMerma' ).each(function() {
   		codMerma = $(this).text(); // Se trae el texto	
@@ -236,8 +243,5 @@ function obtenerDatos() {
 	$( '.desMerma' ).each(function() {
   		desMerma = $(this).text(); // Se trae el texto	
 		$( '#hiddenMerma' ).append( '<input type="hidden" name="Descripcion" value="'+ desMerma +'">' ); // Se agrega una etiqueta input con el valor asignado
-	});		
-	$('select[name="cveCategoria"]').each(function(key, element) {
-    	$( '#hiddenMerma' ).append(element); // Se agrega los valores de Categoria
-	});
+	});	
 }

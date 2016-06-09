@@ -6,10 +6,10 @@ $(function() {
 		window.location.href = "mermas.html";
 	}
 	
-	// Peticion AJAX para insertar la informacion capturada en Inventario
+	// Petición AJAX para insertar la información capturada en Inventario
 	$( '#submitSesion' ).on( 'click touch', function(event) {
 
-		event.preventDefault(); // Previene se haga una peticion
+		event.preventDefault(); // Previene se haga una petición
 
 		var datosForm = $( '#formLogin' ).serialize(); // Trae todos los valores dentro del form
 
@@ -52,13 +52,13 @@ $(function() {
 			        }
 			        else {
 						$.snackbar({
-							content: data.Data, 
+							content: data.Data[0].Output, 
 							timeout: 5000
 						}); 
 			        }
 		        } else {
 					$.snackbar({
-						content: "Ocurri&oacute; un error, al intentar iniciar sesi&oacute;n", 
+						content: "Ocurrió un error, al intentar iniciar sesión", 
 						timeout: 5000
 					}); 
         			$( '#submitSesion' ).text( 'Iniciar sesión' );	        	
@@ -79,13 +79,13 @@ $(function() {
 				
 				if (xhr.status === 500) {
 					$.snackbar({
-						content: "Ocurri&oacute; un error, al comunicarse con el servidor", 
+						content: "Ocurrió un error, al comunicarse con el servidor", 
 						timeout: 5000
 					}); 
 				} 
 				else {
 					$.snackbar({
-						content: "Ocurri&oacute; un error, en la petici&oacute;n", 
+						content: "Ocurrió un error, en la petición", 
 						timeout: 5000
 					}); 
 				}
@@ -94,7 +94,7 @@ $(function() {
 
 	});
 
-	/** Funcion para obtener las plantas **/
+	/** Función para obtener las plantas **/
 	function obtenerPlantas(plantas) {
 
 		var catPlantas = "";
@@ -107,7 +107,7 @@ $(function() {
 		return catPlantas;
 	}
 
-	/** Funcion para obtener los cedis **/
+	/** Función para obtener los cedis **/
 	function obtenerCedis(cedis) {
 
 		var catCedis = "";
