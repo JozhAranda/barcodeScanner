@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="theme-color" content="#444">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" crossorigin="anonymous">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      body {
+        background: #333;
+      }
+	  .btn {
+		margin-bottom: -5px;
+		padding-top: 5%;
+	  }
+	  @media screen and (max-width: 480px) {
+		.btn {
+			padding-top: 15%;
+		}
+	  }
+    </style>
+  </head>
+
+  <body>
+	<div class="row-fluid">
+		<div class="col-xs-12">
+		  <a href="optmermas.html" class="btn btn-warning btn-lg btn-block" id="scan1">MERMAS</a>
+		  <a href="" class="btn btn-success btn-lg btn-block" id="scan2">RE-EMPAQUE</a>
+		  <a href="" class="btn btn-primary btn-lg btn-block" id="scan3">DEVOLUCION</a>
+		  <a href="" class="btn btn-info btn-lg btn-block" id="scan4">INVENTARIO</a>
+		</div>
+	</div>
+	  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="assets/js/jquery.min.js" type="text/javascript"></script>
+	<script>
+		$(function() {
+			var body = document.body,
+			html = document.documentElement;
+
+			var height = Math.max( 
+							body.scrollHeight, body.offsetHeight, 
+							html.clientHeight, html.scrollHeight, 
+							html.offsetHeight );
+							   
+			var scan1 = $('#scan1');
+			var scan2 = $('#scan2');
+			var scan3 = $('#scan3');
+			var scan4 = $('#scan4');
+			
+			scan1.css('height', (height/4) + 'px');
+			scan2.css('height', (height/4) + 'px');
+			scan3.css('height', (height/4) + 'px');
+			scan4.css('height', (height/4) + 'px');
+		});
+	</script>
+  </body>
+</html>
