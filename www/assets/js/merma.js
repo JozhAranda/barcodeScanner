@@ -1,5 +1,17 @@
 $(function() {
 
+	/** Fecha del dia de hoy a campo de fecha **/
+	var d = new Date();
+
+	var month = d.getMonth() + 1;
+	var day = d.getDate();
+	var year = d.getFullYear();
+
+	var date = ( day < 10 ? '0' : '' ) + day + '/' + ( month < 10 ? '0' : '' ) + month + '/' + year.toString().substr(2,2);
+
+	$( '#fechaMerma' ).val( date );
+	/** Fin de fecha **/
+
 	/** Tamaño de la tabla se ajusta al espacio libre a lo alto **/
 	var body = document.body,
 	html = document.documentElement;
@@ -8,6 +20,13 @@ $(function() {
 					   
 	$( '#tableMerma' ).css('max-height', ( height / 1.5 ) + 'px').css( 'overflow-y', 'auto' );
 	/** Fin de tabla **/
+
+	$('#fechaMerma').datepicker({
+	    endDate: "today",
+	    format: "dd/mm/yy",
+	    language: "es",
+	    orientation: "top left"
+	});
 
 	/** Revisar sesión **/
 	if(localStorage.getItem('user') == null) {
