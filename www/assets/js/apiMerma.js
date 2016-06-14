@@ -3,9 +3,9 @@ $(function() {
 	$( '.loader' ).fadeOut( '200' ).css( 'display', 'block' );  // Agrega el loading
 
 	// Se asigna los valor localStorage a una variable
-	var user = localStorage.getItem('user');
+	var user 	= localStorage.getItem('user');
 	var plantas = localStorage.getItem('planta');
-	var cedis = localStorage.getItem('cedis');
+	var cedis 	= localStorage.getItem('cedis');
 
 	// Realiza una consulta al API para traer las plantas
 	$.get('http://10.1.0.13/Mermas/api/Mermas/Plantas', function(element) {
@@ -112,20 +112,16 @@ $(function() {
 						
 				// Crea un nuevo row en la tabla de datosMerma
 				$( '#datosMerma' ).append(
-					/*'<tr class="delete">' +
-					'<td class="codMerma">' + element[0].Codigo + '</td>' + 
-					'<td class="cajaMerma" contenteditable="true">1</td>' + 
-					'<td class="skuMerma">' + element[0].SKU + '</td>' + 
-					'<td class="desMerma">' + element[0].Descripcion + '</td>' + 
-					'</tr>'*/
-				    '<div class="notice delete">'+
+					'<div class="notice delete">'+
 			        '<strong class="codMerma">' + element[0].Codigo +
 			        '<span class="cajaMerma inC pull-right" contenteditable="true">1</span></strong>'+
 			        '<br>'+
-			        '<span class="skuMerma" style="font-weight: 500;">' + ('000' + element[0].SKU).slice(-4)  + ' - </span></span>' +
-			        '<span class="desMerma">' + element[0].Descripcion +
+			        '<span class="skuMerma" style="font-weight: 500;">' + ('000' + element[0].SKU).slice(-4)  + '</span> - ' +
+			        '<span class="desMerma">' + element[0].Descripcion + '</span>' +
 					'</div>'
 				);
+
+				$( '#hiddenMerma' ).append( '<input type="hidden" name="Caja" value="'+ element[0].Unidad +'">' ); // Se agrega una etiqueta input con el valor asignado
 			
 				$( '#scanCode' ).val("");
 
@@ -246,7 +242,7 @@ function obtenerDatos() {
 	});
 	$( '.codMerma' ).each(function() {
   		codMerma = $(this).text(); // Se trae el texto	
-		$( '#hiddenMerma' ).append( '<input type="hidden" name="Codigo" value="'+ codMerma +'">' ); // Se agrega una etiqueta input con el valor asignado
+		$( '#hiddenMerma' ).append( '<input type="hidden" name="Codigo" value="'+ codMerma.substring(0, 13) +'">' ); // Se agrega una etiqueta input con el valor asignado
 	});
 	$( '.skuMerma' ).each(function() {
   		skuMerma = $(this).text(); // Se trae el texto	
