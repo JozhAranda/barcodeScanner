@@ -7,6 +7,19 @@ $(function() {
 	var plantas = localStorage.getItem('planta');
 	var cedis 	= localStorage.getItem('cedis');
 
+	// Se extrae toda la BD
+/*	$.get('http://10.1.0.13/Mermas/Mermas/Catalogo', function(element) {
+	      //initialize
+      	if(localStorage.getItem("Mermas") == null) {
+
+    	    var data = [];
+	        data = JSON.stringify(element);
+    	    localStorage.setItem("Mermas", data);
+      	}
+
+		$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' ); // Quita el loading
+	});	
+*/
 	// Realiza una consulta al API para traer las plantas
 	$.get('http://10.1.0.13/Mermas/api/Mermas/Plantas', function(element) {
 
