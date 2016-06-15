@@ -28,6 +28,8 @@ $(function() {
 	    orientation: "top left"
 	});
 
+	$( '.input-group-addon' ).css('display', 'none !important');
+
 	/** Revisar sesión **/
 	if(localStorage.getItem('user') == null) {
 		
