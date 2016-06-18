@@ -7,7 +7,7 @@ $(function() {
 	}
 	
 	// Petición AJAX para insertar la información capturada en Inventario
-	$( '#submitSesion' ).on( 'click touch', function(event) {
+	$( '#submitSesion' ).on( 'touchstart click', function(event) {
 
 		event.preventDefault(); // Previene se haga una petición
 

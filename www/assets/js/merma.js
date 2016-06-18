@@ -18,17 +18,10 @@ $(function() {
 
 	var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
 					   
-	$( '#tableMerma' ).css('max-height', ( height / 1.5 ) + 'px').css( 'overflow-y', 'auto' );
+	$( '#tableMerma' ).css('max-height', ( height / 1.5 ) + 'px').css( 'overflow-y', 'auto' ).css('-webkit-overflow-scrolling', 'touch');
 	/** Fin de tabla **/
 
-	$('#fechaMerma').datepicker({
-	    endDate: "today",
-	    format: "dd/mm/yy",
-	    language: "es",
-	    orientation: "top left"
-	});
-
-	$( '.input-group-addon' ).css('display', 'none !important');
+	$( '.input-group-addon' ).css('display', 'none'); // Remueve al addon en el calendario
 
 	/** Revisar sesión **/
 	if(localStorage.getItem('user') == null) {
@@ -39,7 +32,7 @@ $(function() {
 	/** Fin de revisión **/	
 	
 	/** Cerrar sesión **/
-	$( '#logout' ).on('click touch', function(e) {
+	$( '#logout' ).on('touchstart click', function(e) {
 		
 		localStorage.clear();
 		
@@ -52,14 +45,14 @@ $(function() {
 	$( '#menuLeft' ).css('height', ( height + 10 ) + 'px').css( 'overflow-y', 'auto' );
 	$( '#usuarioText' ).text(localStorage.getItem('user'));
 	
-	$( '#slideLeft' ).on('click touch', function(e) {
+	$( '#slideLeft' ).on('touchcancel click', function(e) {
 
 		$( '#menuLeft' ).animate({width: 'toggle'});		
 	});	
 	/** Fin del menú lateral izquierdo **/
 	
 	/** Ocultar el form **/
-	$( '#slideUp' ).on('click touch', function() {
+	$( '#slideUp' ).on('touchcancel click', function() {
 
 		$( '#formMerma' ).slideToggle( "slow" );
 	});
@@ -91,7 +84,7 @@ $$( '.delete' ).swipeRight(function(e) {
 
 	e.preventDefault();
 
-	var r = confirm("¿Deseas eliminar el registro?");
+	var r = confirm("¿Desea eliminar el registro?");
 	if (r == true) {
 	
 		$$(this).closest('div').remove();
@@ -100,3 +93,18 @@ $$( '.delete' ).swipeRight(function(e) {
 	return false;      	
 });
 /** Fin de remover **/
+
+$$( '.title' ).swipeDown(function(e) {
+
+	e.preventDefault();
+
+	var my_delay = 1000;
+
+	function delayFunction() {	
+		$( 'body' ).load( 'index.html' ).hide().fadeIn(1500).delay(6000);
+		window.location.href = "index.html";		
+	}
+	
+	setTimeout(delayFunction, my_delay);	
+});
+

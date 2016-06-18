@@ -24,7 +24,7 @@
 			background: #ECEFF1;
 		}
 		.snackbar {
-			background: rgba(161, 14, 32, 0.8);
+			background: #7f7f84;
 			padding: 7px;
 			color: #fff;
 		}
@@ -78,9 +78,28 @@
 	<script type="text/javascript" charset="utf-8">
 		document.addEventListener("deviceready", onDeviceReady, false);
 		function onDeviceReady() {
+
 			var element = document.getElementById('Imei');
 			element.value = device.uuid; 
 		}
+    </script>
+    <script type="text/javascript">
+        var xhr = new XMLHttpRequest();
+        var url = "http://10.1.0.13/Mermas/";
+        xhr.addEventListener('readystatechange', state_change, true);
+        xhr.open("GET", url, true);
+        xhr.send(null);
+        
+        function state_change() {
+          
+      		if (xhr.status < 200) {
+
+				$.snackbar({
+					content: "No existe conexión a internet", 
+					timeout: 5000
+				}); 
+          	}
+     	}
     </script>
     <script type="text/javascript">
 		$(function () {
