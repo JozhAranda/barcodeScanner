@@ -152,6 +152,9 @@
         	});
 
         	$( '#btnScan' ).on('touchcancel click', function(e) {
+
+    			e.preventDefault();
+
 		   		cordova.plugins.barcodeScanner.scan(
 		      		function (result) {
 
@@ -201,6 +204,8 @@
 		          		alert("Escaneo fallido: " + error);
 			      	}
 		    	);
+
+		    	return;
         	});
       	}
     </script>
