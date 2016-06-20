@@ -194,6 +194,8 @@
 								});
 							}
 						}
+
+		          		$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' );  // Agrega el loading
 			      	}, 
 		    	  	function (error) {
 		          		alert("Escaneo fallido: " + error);
