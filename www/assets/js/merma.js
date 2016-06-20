@@ -52,9 +52,18 @@ $(function() {
 	/** Fin del menú lateral izquierdo **/
 	
 	/** Ocultar el form **/
+	var aux = 0;
 	$( '#slideUp' ).on('touchcancel click', function() {
 
 		$( '#formMerma' ).slideToggle( "slow" );
+		if(aux == 0) {
+			$(this).css("transform", "rotate(180deg)") 
+			aux = 1;
+		
+		} else {
+			$(this).css("transform", "rotate(0deg)");
+			aux = 0; 
+		}
 	});
 	/** Fin ocultar **/
 
@@ -98,13 +107,6 @@ $$( '.title' ).swipeDown(function(e) {
 
 	e.preventDefault();
 
-	var my_delay = 1000;
-
-	function delayFunction() {	
-		$( 'body' ).load( 'index.html' ).hide().fadeIn(1500).delay(6000);
-		window.location.href = "index.html";		
-	}
-	
-	setTimeout(delayFunction, my_delay);	
+	$( 'body' ).load( 'index.html' ).hide().fadeIn(1500).delay(6000);
 });
 

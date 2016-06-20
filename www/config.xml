@@ -4,7 +4,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.phonegap.inventario"
-        version   = "0.6.2">
+        version   = "0.9.2">
 
     <name>Inventario</name>
 
