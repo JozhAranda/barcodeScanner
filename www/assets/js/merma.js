@@ -114,19 +114,19 @@ $$( '.title' ).swipeDown(function(e) {
 /** Fin del refresh **/
 
 /** Cambia del escaner a camara **/
-$$( '#scanCode' ).swipeLeft(function(e) {
+$$( '#formMerma' ).swipeLeft(function(e) {
 
 	e.preventDefault();
 
-	$(this).attr('type', 'hidden');
+	$( '#scanCode' ).attr('type', 'hidden');
 
 	$( '#btnScan' ).css('display', 'block');
 });
-$$( '#btnScan' ).swipeRight(function(e) {
+$$( '#formMerma' ).swipeRight(function(e) {
 
 	e.preventDefault();
 
-	$(this).css('display', 'none');
+	$( '#btnScan' ).css('display', 'none');
 
 	$( '#scanCode' ).attr('type', 'text');
 });
