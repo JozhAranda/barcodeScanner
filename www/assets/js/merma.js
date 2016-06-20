@@ -103,10 +103,34 @@ $$( '.delete' ).swipeRight(function(e) {
 });
 /** Fin de remover **/
 
+/** Refresca la vista**/
 $$( '.title' ).swipeDown(function(e) {
 
 	e.preventDefault();
 
 	$( 'body' ).load( 'index.html' ).hide().fadeIn(1500).delay(6000);
 });
+/** Fin del refresh **/
 
+/** Cambia del escaner a camara **/
+$$( '#scanCode' ).swipeLeft(function(e) {
+
+	e.preventDefault();
+
+	$(this).attr('type', 'hidden');
+
+	$( '#btnScan' ).css('display', 'block');
+
+	return false;      	
+});
+$$( '#btnScan' ).swipeRight(function(e) {
+
+	e.preventDefault();
+
+	$(this).css('display', 'none');
+
+	$( '#scanCode' ).attr('type', 'text');
+
+	return false;      	
+});
+/** Fin del escaner - camara **/

@@ -118,6 +118,7 @@
 					<form id="formScan" class="form-group">
 						<label>Código</label>
 						<input type="number" id="scanCode" name="scanCode" class="form-control" placeholder="Toca y escanea el código de barras" maxlength="16" disabled />
+						<button class="btn btn-default btn-block" id="btnScan" style="background: #7f7f84;display: none;color: #fff;margin: 0 auto;">Escanear c&oacute;digo</button>
 					</form>
 				</div>
 			</div>
@@ -148,6 +149,17 @@
   		        document.addEventListener("backbutton", function (e) {
 		            e.preventDefault();
 		        }, false );				
+        	});
+        	$( '#btnScan' ).on('touchstart click', function(e) {
+		   		cordova.plugins.barcodeScanner.scan(
+		      		function (result) {
+
+		          		$('#scanCode').val(result.text);
+			      	}, 
+		    	  	function (error) {
+		          		alert("Escaneo fallido: " + error);
+			      	}
+			   	);
         	});
       	}
     </script>
