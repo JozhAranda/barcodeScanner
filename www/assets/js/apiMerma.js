@@ -41,14 +41,15 @@ $(function() {
 	$( '#catPlantas' ).on( 'change', function(e) {
 
 		localStorage.setItem('cvePlanta', $(this).val());
+		
+		var catCedis = $( '#catCedis' );
+		var arrayCedis = cedis.split("-");
+
+		catCedis.empty();
+		catCedis.append('<option>Seleccione un cedis</option>');
 
 		$.get('http://10.1.0.13/Mermas/api/Mermas/Cedis/' + $(this).val(), function(element) {
 			
-			var catCedis = $( '#catCedis' );
-			var arrayCedis = cedis.split("-");
-
-			$( '#catCedis' ).empty();
-
 			for (var i = 0; i < element.length; i++) {
 
 				if(arrayCedis.indexOf(element[i].cveCedis.toString()) > -1) {
@@ -67,11 +68,11 @@ $(function() {
 		var cedis = $(this).val();
 		var lCedis = $('#catCedis option:selected').attr('alt');
 
-		$( '#catUnidad' ).empty();
+		var catUnidad = $( '#catUnidad' );
+		catUnidad.empty();
+		catUnidad.append('<option>Seleccione una unidad</option>');
 		
 		$.get('http://10.1.0.13/Mermas/api/Mermas/Unidades/' + lCedis, function(element) {
-			
-			var catUnidad = $( '#catUnidad' );
 			    
 			for (var i = 0; i < element.length; i++) {
 
@@ -90,11 +91,11 @@ $(function() {
 		var cedis 	= $('#catCedis option:selected').val();
 		var unidad 	= $('#catUnidad option:selected').attr('alt'); 
 
-		$( '#catRuta' ).empty();
+		var catRuta = $( '#catRuta' );
+		catRuta.empty();
+		catRuta.append('<option>Seleccione una ruta</option>');
 
 		$.get('http://10.1.0.13/Mermas/api/Mermas/Rutas/' + cedis, function(element) {
-
-			var catRuta = $( '#catRuta' );
 			    
 			for (var i = 0; i < element.length; i++) {
 				
