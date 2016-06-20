@@ -118,7 +118,7 @@
 					<form id="formScan" class="form-group">
 						<label>Código</label>
 						<input type="number" id="scanCode" name="scanCode" class="form-control" placeholder="Toca y escanea el código de barras" maxlength="16" disabled />
-						<button class="btn btn-default btn-block" id="btnScan" style="background: #7f7f84;display: none;color: #fff;margin: 0 auto;">Escanear c&oacute;digo</button>
+						<button class="btn btn-default btn-block" id="btnScan" style="background: #7f7f84;display: none;color: #fff;margin: 0 auto;" disabled>Escanear c&oacute;digo</button>
 					</form>
 				</div>
 			</div>
@@ -150,16 +150,55 @@
 		            e.preventDefault();
 		        }, false );				
         	});
+
         	$( '#btnScan' ).on('touchstart click', function(e) {
 		   		cordova.plugins.barcodeScanner.scan(
 		      		function (result) {
 
-		          		$('#scanCode').val(result.text);
+		          		$( '.loader' ).fadeOut( '200' ).css( 'display', 'block' );  // Agrega el loading
+
+						var cvePlanta = localStorage.getItem('cvePlanta');
+						var scanCode = result.text;
+						
+						var mermas 		= localStorage.getItem("Mermas");
+						var parseMerma 	= JSON.parse(mermas);
+
+						for(var i = 0; i < parseMerma.length; i++) {
+
+							if(parseMerma[i].cvePlanta == cvePlanta && parseMerma[i].Codigo == scanCode) {
+
+								// Crea un nuevo row en la tabla de datosMerma
+								$( '#datosMerma' ).append(
+									'<div class="notice delete">'+
+							        '<strong class="codMerma">' + parseMerma[i].Codigo +
+							        '<span class="cajaMerma inC pull-right" contenteditable="true">1</span></strong>'+
+							        '<br>'+
+							        '<span class="skuMerma" style="font-weight: 500;">' + ('000' + parseMerma[i].SKU).slice(-4)  + '</span> - ' +
+							        '<span class="desMerma">' + parseMerma[i].Descripcion + '</span>' +
+									'</div>'
+								);
+
+								$( '#hiddenMerma' ).append( '<input type="hidden" name="Caja" value="'+ parseMerma[i].Unidad +'">' ); // Se agrega una etiqueta input con el valor asignado
+							
+								$( '#scanCode' ).val("");
+
+								$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' );  // Quita el loading
+
+								$( '.cajaMerma' ).keydown(function(e) {
+									if($(this).text() <= 0) {
+										$(this).text("1");
+									}
+							     	if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {				    
+								    	return false;
+								    }
+								});
+							}
+						}
 			      	}, 
 		    	  	function (error) {
 		          		alert("Escaneo fallido: " + error);
 			      	}
-			   	);
+		    	);
         	});
       	}
     </script>

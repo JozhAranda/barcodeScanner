@@ -70,7 +70,8 @@ $(function() {
 	/** Deshabilitar el input de escaneo **/
 	$( '#catUnidad' ).on('change', function(e) {
 		
-		$( '#scanCode' ).attr('disabled', false);		
+		$( '#scanCode' ).attr('disabled', false);
+		$( '#btnScan' ).attr('disabled', false);		
 	});
 	/** Fin del deshabilitar **/
 
@@ -120,8 +121,6 @@ $$( '#scanCode' ).swipeLeft(function(e) {
 	$(this).attr('type', 'hidden');
 
 	$( '#btnScan' ).css('display', 'block');
-
-	return false;      	
 });
 $$( '#btnScan' ).swipeRight(function(e) {
 
@@ -130,7 +129,5 @@ $$( '#btnScan' ).swipeRight(function(e) {
 	$(this).css('display', 'none');
 
 	$( '#scanCode' ).attr('type', 'text');
-
-	return false;      	
 });
 /** Fin del escaner - camara **/
