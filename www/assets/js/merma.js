@@ -128,6 +128,6 @@ $$( '#formMerma' ).swipeRight(function(e) {
 
 	$( '#btnScan' ).css('display', 'none');
 
-	$( '#scanCode' ).attr('type', 'text');
+	$( '#scanCode' ).attr('type', 'number');
 });
 /** Fin del escaner - camara **/
