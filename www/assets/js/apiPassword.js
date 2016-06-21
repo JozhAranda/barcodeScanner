@@ -6,13 +6,13 @@ $(function() {
 
 		var datosForm = $( '#formLogin' ).serialize(); // Trae todos los valores dentro del form
 
-		var my_delay = 2000; // Se asigna un delay (espera de tiempo)
+		var delay = 2000; // Se asigna un delay (espera de tiempo)
 
 		document.activeElement.blur(); // Oculta el teclado
 
 		$.ajax({
 			method: 'POST',
-			url: "http://localhost:53383/api/Sesiones/Password",
+			url: "http://10.1.0.13/Mermas/api/Sesiones/Password",
 			async: true,
 			crossDomain: true,
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -24,11 +24,21 @@ $(function() {
         	},
 			success: function(data) {
         		$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' );         
-		        
+
 		        if(data) {	
-		        	if(data.Data === "Success") { 	
-		        		$( 'body' ).load( 'index.html' ).hide().fadeIn(1500).delay(6000);
-		        		window.location.href = "index.html";
+		        	if(data.Data[0].Output === "Success") { 	
+
+		        		function redirect() {
+		        			$( 'body' ).load( 'index.html' ).hide().fadeIn(1500).delay(6000);
+		        			window.location.href = "index.html";
+		        		}
+
+		        		setTimeout(redirect, delay);
+
+						$.snackbar({
+							content: "Contraseña cambiada con éxito, ahora inicia sesión por favor.", 
+							timeout: 5000
+						}); 
 			        }
 			        else {
 						$.snackbar({
