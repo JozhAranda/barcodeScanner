@@ -41,7 +41,7 @@ $(function() {
 	$( '#catPlantas' ).on( 'change', function(e) {
 
 		localStorage.setItem('cvePlanta', $(this).val());
-		
+
 		var catCedis = $( '#catCedis' );
 		var arrayCedis = cedis.split("-");
 
@@ -161,10 +161,13 @@ $(function() {
 
 			var mermas 		= localStorage.getItem("Mermas");
 			var parseMerma 	= JSON.parse(mermas);
+			var tempToken 	= 0;
 
 			for(var i = 0; i < parseMerma.length; i++) {
 
 				if(parseMerma[i].cvePlanta == cvePlanta && parseMerma[i].Codigo == scanCode) {
+
+					tempToken = 1;
 
 					// Crea un nuevo row en la tabla de datosMerma
 					$( '#datosMerma' ).append(
@@ -184,7 +187,7 @@ $(function() {
 					$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' );  // Quita el loading
 
 					$( '.cajaMerma' ).keydown(function(e) {
-						if($(this).text() <= 0) {
+						if($(this).text() <= 0 && $(this).text() != "") {
 							$(this).text("1");
 						}
 				     	if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {				    
@@ -192,6 +195,15 @@ $(function() {
 					    }
 					});
 				}
+			}
+
+			$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' );  // Quita el loading
+
+			if(tempToken == 0) {
+				$.snackbar({
+					content: "No se encontró el código", 
+					timeout: 5000
+				}); 
 			}
 		}
 	});

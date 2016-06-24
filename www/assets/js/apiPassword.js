@@ -42,7 +42,7 @@ $(function() {
 			        }
 			        else {
 						$.snackbar({
-							content: data.Data, 
+							content: data.Data[0].Output, 
 							timeout: 5000
 						}); 
 			        }
