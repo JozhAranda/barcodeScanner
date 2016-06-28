@@ -81,6 +81,10 @@
 
 			var element = document.getElementById('Imei');
 			element.value = device.uuid; 
+
+			if (cordova.platformId == 'android') {
+			    StatusBar.backgroundColorByHexString("#B81321");
+			}
 		}
     </script>
     <script type="text/javascript">
