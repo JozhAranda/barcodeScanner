@@ -1,5 +1,7 @@
 body {
 	background: #ECEFF1;
+	margin-top: 0;
+	transition: all 1s ease;
 }
 
 .navbar-inverse {
@@ -63,6 +65,78 @@ input:-moz-placeholder { color:#666 !important; }
 	margin-top: -10px;
 	border: 0;
 }	
+.notice {
+    padding: 5px 10px;
+    background-color: #fafafa;
+    border-left: 5px solid #7f7f84;
+    margin-bottom: 2px;
+    -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+       -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+            box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+}	
+.inC {
+	background: #7f7f84;
+	padding: 12px 10px;
+	color: #fff;
+}	
+.inC:focus {
+    box-shadow: 2px 2px 8px #999;
+    background: #263238;
+}
+#guardarMerma {
+	font-weight: 700;
+	background: #263238;
+	border-color: #263238;
+}
+#usuarioText {
+	color: #eee;
+	margin-top: 20px;
+	font-weight: 700;
+}
+#logout {
+	background: rgb(38, 50, 56);
+	border: 0;
+	color: #eee;
+}
+#companiaText {
+	color: #eee;
+	padding: 10px;
+	font-size: 10px;
+	margin-top: 10px;
+}
+.form-control {
+	background: #fff !important;
+	padding-left: 7px !important; 
+}
+#radioBtn {
+	padding: 6.5px;
+}
+#radioBtn .notActive{
+    color: #444;
+    background-color: #fff;
+}
+#radioBtn .active {
+	background: #7f7f84;
+	color: #fff;
+}
+.optionScan {
+	background: #1F2B33;
+	border: 1px solid #1F2B33;
+	margin-bottom: 15px;
+}
+.modal-title {
+	font-size: 16px !important;
+	line-height: 1.5 !important;
+}
+.modal-body {
+	padding: 0px 10px 10px !important;
+}
+.modal-content {
+    background-color: #ECEFF1 !important;
+}
+.modal-footer {
+	display: none !important;
+}
 
 @media screen and (max-width: 480px) {
 	.col-xs-6 {

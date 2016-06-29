@@ -19,83 +19,6 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style type="text/css">
-    	body {
-    		margin-top: 0;
-    		transition: all 1s ease;
-    	}
-		.notice {
-		    padding: 5px 10px;
-		    background-color: #fafafa;
-		    border-left: 5px solid #7f7f84;
-		    margin-bottom: 2px;
-		    -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
-		       -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
-		            box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
-		}	
-		.inC {
-			background: #7f7f84;
-			padding: 12px 10px;
-			color: #fff;
-		}	
-		.inC:focus {
-		    box-shadow: 2px 2px 8px #999;
-		}
-		#guardarMerma {
-			font-weight: 700;
-			background: #263238;
-			border-color: #263238;
-		}
-		#usuarioText {
-			color: #eee;
-			margin-top: 20px;
-			font-weight: 700;
-		}
-		#logout {
-			background: rgb(38, 50, 56);
-			border: 0;
-			color: #eee;
-		}
-		#companiaText {
-			color: #eee;
-			padding: 10px;
-			font-size: 10px;
-			margin-top: 10px;
-		}
-		.form-control {
-			background: #fff !important;
-			padding-left: 7px !important; 
-		}
-		#radioBtn {
-			padding: 6.5px;
-		}
-		#radioBtn .notActive{
-		    color: #444;
-		    background-color: #fff;
-		}
-		#radioBtn .active {
-			background: #7f7f84;
-			color: #fff;
-		}
-		.optionScan {
-			background: #1F2B33;
-    		border: 1px solid #1F2B33;
-    		margin-bottom: 15px;
-		}
-		.modal-title {
-			font-size: 16px !important;
-			line-height: 1.5 !important;
-		}
-		.modal-body {
-			padding: 0px 10px 10px !important;
-		}
-		.modal-content {
-		    background-color: #ECEFF1 !important;
-		}
-		.modal-footer {
-			display: none !important;
-		}
-    </style>
   </head>
 
   <body>
@@ -337,6 +260,24 @@
 		    	return;
         	});
       	}
+    </script>
+    <script type="text/javascript">
+        var xhr = new XMLHttpRequest();
+        var url = "http://10.1.0.13/Mermas/";
+        xhr.addEventListener('readystatechange', state_change, true);
+        xhr.open("GET", url, true);
+        xhr.send(null);
+        
+        function state_change() {
+          
+      		if (xhr.status < 200) {
+
+				$.snackbar({
+					content: "No existe conexión a internet", 
+					timeout: 5000
+				}); 
+          	}
+     	}
     </script>
     <script type="text/javascript">
       	$.validator.addMethod('regex', function(value, element, param) {

@@ -42,7 +42,7 @@ $(function() {
 	/** Fin sesión **/	
 	
 	/** Mostrar menú lateral izquierdo **/
-	$( '#menuLeft' ).css('height', ( height + 10 ) + 'px').css( 'overflow-y', 'auto' );
+	$( '#menuLeft' ).css('height', ( height + 10 ) + 'px').css( 'overflow-y', 'auto' ).css('-webkit-overflow-scrolling', 'touch');
 	$( '#usuarioText' ).text(localStorage.getItem('user'));
 	
 	$( '#slideLeft' ).on('touchcancel click', function(e) {
