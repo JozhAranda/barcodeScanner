@@ -51,6 +51,28 @@ $(function() {
 	});	
 	/** Fin del menú lateral izquierdo **/
 	
+	/** Selecciona el tipo de escanear **/
+	$('#radioBtn a').on('click', function(){
+	    var sel = $(this).data('title');
+	    var tog = $(this).data('toggle');
+	    $('#'+tog).prop('value', sel);
+	    
+	    if(sel === "Camara") {
+
+    		$( '#scanCode' ).attr('type', 'hidden');
+			$( '#btnScan' ).css('display', 'block');
+	    
+	    } else {
+
+			$( '#btnScan' ).css('display', 'none');
+			$( '#scanCode' ).attr('type', 'number');
+	    }
+
+	    $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
+	    $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
+	});
+	/** Fin del tipo de escaneo **/
+
 	/** Ocultar el form **/
 	var aux = 0;
 	$( '#slideUp' ).on('touchcancel click', function() {
@@ -103,6 +125,36 @@ $$( '.delete' ).swipeRight(function(e) {
 	return false;      	
 });
 /** Fin de remover **/
+
+/** Seleccionar un producto de varios **/
+$$( '.select' ).swipeRight(function(e) {
+
+	e.preventDefault();
+
+	var htmlMerma = $$(this).closest('div');
+
+	$( '#datosMerma' ).append(
+		'<div class="notice delete">'+
+        '<strong class="codMerma">' + htmlMerma.find('.codMerma').text().substring(0, 13) +
+        '<span class="cajaMerma inC pull-right" contenteditable="true">1</span></strong>'+
+        '<br>'+
+        '<span class="skuMerma" style="font-weight: 500;">' + htmlMerma.find('.skuMerma').text()  + '</span> - ' +
+        '<span class="desMerma">' + htmlMerma.find('.desMerma').text() + '</span>' +
+		'</div>'
+	);
+
+	$( '#hiddenMerma' ).append( '<input type="hidden" name="Caja" value="'+ htmlMerma.find('.uniMerma').text() +'">' ); // Se agrega una etiqueta input con el valor asignado	
+
+	$( '.cajaMerma' ).keydown(function(e) {
+		if($(this).text() <= 0 && $(this).text() != "") {
+			$(this).text("1");
+		}
+     	if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {				    
+	    	return false;
+	    }
+	});
+});
+/** Fin de seleccionar **/
 
 /** Refresca la vista**/
 $$( '.title' ).swipeDown(function(e) {

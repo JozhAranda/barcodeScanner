@@ -38,9 +38,62 @@
 			padding: 12px 10px;
 			color: #fff;
 		}	
+		.inC:focus {
+		    box-shadow: 2px 2px 8px #999;
+		}
+		#guardarMerma {
+			font-weight: 700;
+			background: #263238;
+			border-color: #263238;
+		}
+		#usuarioText {
+			color: #eee;
+			margin-top: 20px;
+			font-weight: 700;
+		}
+		#logout {
+			background: rgb(38, 50, 56);
+			border: 0;
+			color: #eee;
+		}
+		#companiaText {
+			color: #eee;
+			padding: 10px;
+			font-size: 10px;
+			margin-top: 10px;
+		}
 		.form-control {
 			background: #fff !important;
 			padding-left: 7px !important; 
+		}
+		#radioBtn {
+			padding: 6.5px;
+		}
+		#radioBtn .notActive{
+		    color: #444;
+		    background-color: #fff;
+		}
+		#radioBtn .active {
+			background: #7f7f84;
+			color: #fff;
+		}
+		.optionScan {
+			background: #1F2B33;
+    		border: 1px solid #1F2B33;
+    		margin-bottom: 15px;
+		}
+		.modal-title {
+			font-size: 16px !important;
+			line-height: 1.5 !important;
+		}
+		.modal-body {
+			padding: 0px 10px 10px !important;
+		}
+		.modal-content {
+		    background-color: #ECEFF1 !important;
+		}
+		.modal-footer {
+			display: none !important;
 		}
     </style>
   </head>
@@ -58,7 +111,7 @@
 							<p class="title">Merma</p>
 						</div>
 						<div class="col-xs-4 col-4" style="position: absolute;right: -25px;top: 19px;">
-							<button type="submit" id="guardarMerma" class="btn btn-sm btn-info pull-right" style="font-weight: 700;background: #263238;border-color: #263238;">Guardar</button>
+							<button type="submit" id="guardarMerma" class="btn btn-sm btn-info pull-right">Guardar</button>
 						</div>
 					</div>
 				</div>
@@ -66,10 +119,18 @@
 		</nav>
 	</header>
 	<div class="container">
-		<div class="loader"></div>
-		<div class="nav" id="menuLeft">
-			<p class="text-center" id="usuarioText" style="color: #eee;margin-top: 20px;font-weight: 700;"></p>
-			<a href="#" id="logout" class="btn btn-block" style="background: rgb(38, 50, 56);border: 0;color: #eee;">Cerrar sesión</a>
+		<div class="loader"></div> <!-- Loading -->
+		<div class="nav" id="menuLeft"> <!-- Menu lateral izquierdo -->
+			<p class="text-center" id="usuarioText"></p>
+			<div class="input-group optionScan">
+				<div id="radioBtn" class="btn-group">
+					<a class="btn btn-primary btn-sm active" data-toggle="typeScan" data-title="Lector">Lector</a>
+					<a class="btn btn-primary btn-sm notActive" data-toggle="typeScan" data-title="Camara">Cámara</a>
+				</div>
+			</div>
+			<a href="#" id="logout" class="btn btn-block">Cerrar sesión</a>
+			<p class="text-center" id="companiaText">Compañia Embotelladora del Fuerte S. de R.L de C.V.</p>
+			<p class="text-center" id="companiaText"><strong>V. 0.8.7</strong></p>
 		</div>
 		<div class="row">
 			<form class="form" role="form" id="formMerma">
@@ -122,7 +183,7 @@
 					<form id="formScan" class="form-group">
 						<label>Código</label>
 						<input type="number" id="scanCode" name="scanCode" class="form-control" placeholder="Toca y escanea el código de barras" maxlength="16" disabled />
-						<button class="btn btn-default btn-block" id="btnScan" style="background: #7f7f84;display: none;color: #fff;margin: 0 auto;" disabled>Escanear c&oacute;digo</button>
+						<button class="btn btn-default btn-block" id="btnScan" style="background: #7f7f84;display: none;color: #fff;margin: 0 auto;" disabled>Escanear código</button>
 					</form>
 				</div>
 			</div>
@@ -137,11 +198,12 @@
   	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="cordova.js" type="text/javascript"></script>
     <script src="assets/js/jquery.min.js" type="text/javascript"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/quo.min.js" type="text/javascript"></script>
     <script src="assets/js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="assets/js/bootstrap.helpers.min.js" type="text/javascript"></script>
     <script src="assets/js/snackbar.min.js" type="text/javascript"></script>
-    <script src="assets/js/push.js" type="text/javascript"></script>
+    <script src="assets/js/bootbox.min.js" type="text/javascript"></script>
     <script src="assets/js/apiMerma.js" type="text/javascript"></script>
     <script src="assets/js/merma.js" type="text/javascript"></script>
     
@@ -175,39 +237,97 @@
 						var mermas 		= localStorage.getItem("Mermas");
 						var parseMerma 	= JSON.parse(mermas);
 
+						var tempToken 	= 0;
+						var tempMerma 	= new Object(); 
+						var j 			= 0;
+						var countToken 	= 0;
+
 						for(var i = 0; i < parseMerma.length; i++) {
 
 							if(parseMerma[i].cvePlanta == cvePlanta && parseMerma[i].Codigo == scanCode) {
 
-								// Crea un nuevo row en la tabla de datosMerma
-								$( '#datosMerma' ).append(
-									'<div class="notice delete">'+
-							        '<strong class="codMerma">' + parseMerma[i].Codigo +
-							        '<span class="cajaMerma inC pull-right" contenteditable="true">1</span></strong>'+
-							        '<br>'+
-							        '<span class="skuMerma" style="font-weight: 500;">' + ('000' + parseMerma[i].SKU).slice(-4)  + '</span> - ' +
-							        '<span class="desMerma">' + parseMerma[i].Descripcion + '</span>' +
-									'</div>'
-								);
+								tempToken = 1;
 
-								$( '#hiddenMerma' ).append( '<input type="hidden" name="Caja" value="'+ parseMerma[i].Unidad +'">' ); // Se agrega una etiqueta input con el valor asignado
-							
+								tempMerma[j] = {
+									Codigo 		: parseMerma[i].Codigo,
+									SKU 		: ('000' + parseMerma[i].SKU).slice(-4),
+									Descripcion : parseMerma[i].Descripcion,
+									Unidad 		: parseMerma[i].Unidad
+							 	};
+
+							 	j++;
+
+							 	countToken++;
+
 								$( '#scanCode' ).val("");
 
 								$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' );  // Quita el loading
-
-								$( '.cajaMerma' ).keydown(function(e) {
-									if($(this).text() <= 0 && $(this).text != "") {
-										$(this).text("1");
-									}
-							     	if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {				    
-								    	return false;
-								    }
-								});
 							}
 						}
+			
+						if(tempToken == 0) {
 
-		          		$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' );  // Agrega el loading
+							$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' );  // Quita el loading
+							$.snackbar({
+								content: "No se encontró el código", 
+								timeout: 5000
+							}); 
+						}
+
+						/********************************************************************/
+						var tempMermaArray = $.map(tempMerma, function(value, index) {
+						    return [value];
+						});
+
+						if(countToken > 1 && tempMermaArray != null) {
+
+							var html = "";
+
+							for(var i = 0; i < tempMermaArray.length; i++) {
+
+								if(typeof tempMermaArray[i] !== "undefined" || typeof tempMermaArray !== "undefined") {
+									html +=	'<div class="notice select">'+
+											'<strong class="codMerma">' + tempMermaArray[i].Codigo +
+									        '<span class="cajaMerma inC pull-right" contenteditable="true">1</span></strong>'+
+									        '<br>'+
+									        '<span class="skuMerma" style="font-weight: 500;">' + ('000' + tempMermaArray[i].SKU).slice(-4)  + '</span> - ' +
+									        '<span class="desMerma">' + tempMermaArray[i].Descripcion + '</span>' +
+									        '<span class="uniMerma">' + tempMermaArray[i].Unidad + '</span>' +
+									        '</div>';
+								}
+							}
+
+							bootbox.dialog({
+								title: "Selecciona el producto escaneado <span style='color: #777;font-size: 14px;'>(swipe a la derecha)</span>", 
+								message: html
+							});
+
+						} else {
+
+							$( '#datosMerma' ).append(
+								'<div class="notice delete">'+
+						        '<strong class="codMerma">' + tempMermaArray[0].Codigo +
+						        '<span class="cajaMerma inC pull-right" contenteditable="true">1</span></strong>'+
+						        '<br>'+
+						        '<span class="skuMerma" style="font-weight: 500;">' + ('000' + tempMermaArray[0].SKU).slice(-4)  + '</span> - ' +
+						        '<span class="desMerma">' + tempMermaArray[0].Descripcion + '</span>' +
+								'</div>'
+							);
+
+							$( '#hiddenMerma' ).append( '<input type="hidden" name="Caja" value="'+ tempMermaArray[0].Unidad +'">' ); // Se agrega una etiqueta input con el valor asignado
+						}
+
+						$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' );  // Quita el loading
+
+						$( '.cajaMerma' ).keydown(function(e) {
+							if($(this).text() <= 0 && $(this).text() != "") {
+								$(this).text("1");
+							}
+					     	if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {				    
+						    	return false;
+						    }
+						});
+						/********************************************************************/
 			      	}, 
 		    	  	function (error) {
 		          		alert("Escaneo fallido: " + error);
