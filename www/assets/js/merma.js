@@ -22,6 +22,10 @@ $(function() {
 	/** Fin de tabla **/
 
 	$( '.input-group-addon' ).css('display', 'none'); // Remueve al addon en el calendario
+	$(	'.previous' ).text('<');
+	$(	'.next' ).text('>');
+	var dateWidth = $( '#fechaMerma' ).width();
+	$( 'table.calendar' ).css('width' , dateWidth + 27);
 
 	/** Revisar sesión **/
 	if(localStorage.getItem('user') == null) {

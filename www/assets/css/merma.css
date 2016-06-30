@@ -108,6 +108,12 @@ input:-moz-placeholder { color:#666 !important; }
 	background: #fff !important;
 	padding-left: 7px !important; 
 }
+.bfh-datepicker-calendar {
+    margin-left: -10px;
+}
+.bfh-datepicker-calendar>table.calendar {
+    width: 280px;
+}
 #radioBtn {
 	padding: 6.5px;
 }
