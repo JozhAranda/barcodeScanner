@@ -22,10 +22,10 @@ $(function() {
 	/** Fin de tabla **/
 
 	$( '.input-group-addon' ).css('display', 'none'); // Remueve al addon en el calendario
-	$(	'.previous' ).text('<');
-	$(	'.next' ).text('>');
-	var dateWidth = $( '#fechaMerma' ).width();
-	$( 'table.calendar' ).css('width' , dateWidth + 27);
+	$(	'.previous' ).text('<'); // Asigna un < al calendario
+	$(	'.next' ).text('>'); // Asigna un > al calendario
+	var dateWidth = $( '#fechaMerma' ).width(); // Toma el ancho del input del calendario
+	$( 'table.calendar' ).css('width' , dateWidth + 27); // Asigna el ancho al calendario
 
 	/** Revisar sesión **/
 	if(localStorage.getItem('user') == null) {
@@ -50,7 +50,7 @@ $(function() {
 	$( '#usuarioText' ).text(localStorage.getItem('user'));
 	
 	$( '#slideLeft' ).on('touchcancel click', function(e) {
-
+		
 		$( '#menuLeft' ).animate({width: 'toggle'});		
 	});	
 	/** Fin del menú lateral izquierdo **/
@@ -148,6 +148,11 @@ $$( '.select' ).swipeRight(function(e) {
 	);
 
 	$( '#hiddenMerma' ).append( '<input type="hidden" name="Caja" value="'+ htmlMerma.find('.uniMerma').text() +'">' ); // Se agrega una etiqueta input con el valor asignado	
+
+	$.snackbar({
+		content: "Producto agregado", 
+		timeout: 5000
+	}); 
 
 	$( '.cajaMerma' ).keydown(function(e) {
 		if($(this).text() <= 0 && $(this).text() != "") {
