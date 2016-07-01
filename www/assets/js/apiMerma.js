@@ -121,7 +121,7 @@ $(function() {
 
 		var count = $(this).val().length;
 
-		if(count >= 13) {
+		if(count == 8 || count == 13) {
 
 			$( '.loader' ).fadeOut( '200' ).css( 'display', 'block' );  // Agrega el loading
 
@@ -168,12 +168,12 @@ $(function() {
 
 			for(var i = 0; i < parseMerma.length; i++) {
 
-				if(parseMerma[i].cvePlanta == cvePlanta && parseMerma[i].Codigo === scanCode) {
+				if(parseMerma[i].cvePlanta == cvePlanta && parseMerma[i].Codigo == ('00000' + scanCode).slice(-13)) {
 
 					tempToken = 1;
 
 					tempMerma[j] = {
-						Codigo 		: parseMerma[i].Codigo,
+						Codigo 		: ('00000' + parseMerma[i].Codigo).slice(-13),
 						SKU 		: ('000' + parseMerma[i].SKU).slice(-4),
 						Descripcion : parseMerma[i].Descripcion,
 						Unidad 		: parseMerma[i].Unidad
@@ -214,7 +214,7 @@ $(function() {
 								'<strong class="codMerma">' + tempMermaArray[i].Codigo +
 						        '<span class="cajaMerma inC pull-right" contenteditable="true">1</span></strong>'+
 						        '<br>'+
-						        '<span class="skuMerma" style="font-weight: 500;">' + ('000' + tempMermaArray[i].SKU).slice(-4)  + '</span> - ' +
+						        '<span class="skuMerma" style="font-weight: 500;">' + tempMermaArray[i].SKU + '</span> - ' +
 						        '<span class="desMerma">' + tempMermaArray[i].Descripcion + '</span>' +
 						        '<span class="uniMerma">' + tempMermaArray[i].Unidad + '</span>' +
 						        '</div>';
@@ -233,7 +233,7 @@ $(function() {
 			        '<strong class="codMerma">' + tempMermaArray[0].Codigo +
 			        '<span class="cajaMerma inC pull-right" contenteditable="true">1</span></strong>'+
 			        '<br>'+
-			        '<span class="skuMerma" style="font-weight: 500;">' + ('000' + tempMermaArray[0].SKU).slice(-4)  + '</span> - ' +
+			        '<span class="skuMerma" style="font-weight: 500;">' + tempMermaArray[0].SKU  + '</span> - ' +
 			        '<span class="desMerma">' + tempMermaArray[0].Descripcion + '</span>' +
 					'</div>'
 				);

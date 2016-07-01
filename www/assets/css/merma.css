@@ -73,6 +73,17 @@ input:-moz-placeholder { color:#666 !important; }
     -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
        -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
             box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+}
+.notice:hover, .notice:focus, .notice:visited {
+    margin-left: 10px;
+    opacity: 0.8;
+    transition-duration: 100;
+    -webkit-transition: width 3s; /* Safari */
+    -webkit-transition-delay: 1s; /* Safari */
+    transition: width 3s;
+    transition-delay: 1s;
+    -webkit-transition-timing-function: ease;
+    transition-timing-function: ease;
 }	
 .inC {
 	background: #7f7f84;
