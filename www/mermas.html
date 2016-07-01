@@ -105,8 +105,8 @@
 				<div class="col-xs-12">
 					<form id="formScan" class="form-group">
 						<label>Código</label>
-						<input type="number" id="scanCode" name="scanCode" class="form-control" placeholder="Toca y escanea el código de barras" maxlength="16" disabled />
-						<button class="btn btn-default btn-block" id="btnScan" style="background: #7f7f84;display: none;color: #fff;margin: 0 auto;" disabled>Escanear código</button>
+						<input type="number" id="scanCode" name="scanCode" class="form-control" placeholder="Toca y escanea el código de barras" maxlength="13" disabled />
+						<button class="btn btn-default btn-block" id="btnScan" disabled>Escanear código</button>
 					</form>
 				</div>
 			</div>
@@ -290,13 +290,14 @@
           		rules: {
             		scanCode: {
 		                required: true,
-		                minlength: 12,
-		                regex: /^[0-9]{1,14}$/
+		                minlength: 8,
+		                regex: /^[0-9]{1,13}$/
             		}
           		},
           		messages: {
             		scanCode: {
-              			required: "Por favor ingrese un c&oacute;digo valido"
+              			required: "Por favor ingrese un código valido",
+						minlength: "Código debe ser al menos de 8 dígitos"
             		}
           		}
         	});

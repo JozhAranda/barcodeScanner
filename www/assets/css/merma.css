@@ -116,6 +116,12 @@ input:-moz-placeholder { color:#666 !important; }
 	margin-top: 10px;
 	width: 150px;
 }
+#btnScan {
+	background: #7f7f84;
+	display: none;
+	color: #fff;
+	margin: 0 auto;
+}
 .form-control {
 	background: #fff !important;
 	padding-left: 7px !important; 
