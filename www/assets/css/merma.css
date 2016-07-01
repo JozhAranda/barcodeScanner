@@ -54,9 +54,7 @@ input:-moz-placeholder { color:#666 !important; }
 	z-index: 999;	
 }
 #menuLeft {
-	height: 415px;
 	width: 150px;
-	overflow: hidden;
 	display: none;
 	background: #263238;
 	position: absolute;
@@ -64,7 +62,7 @@ input:-moz-placeholder { color:#666 !important; }
 	margin-left: -15px;
 	margin-top: -10px;
 	border: 0;
-}	
+}
 .notice {
     padding: 5px 10px;
     background-color: #fafafa;
@@ -84,7 +82,7 @@ input:-moz-placeholder { color:#666 !important; }
     transition-delay: 1s;
     -webkit-transition-timing-function: ease;
     transition-timing-function: ease;
-}	
+}		
 .inC {
 	background: #7f7f84;
 	padding: 12px 10px;
@@ -103,17 +101,20 @@ input:-moz-placeholder { color:#666 !important; }
 	color: #eee;
 	margin-top: 20px;
 	font-weight: 700;
+	width: 150px;
 }
 #logout {
 	background: rgb(38, 50, 56);
 	border: 0;
 	color: #eee;
+	width: 150px;
 }
 #companiaText {
 	color: #eee;
 	padding: 10px;
 	font-size: 10px;
 	margin-top: 10px;
+	width: 150px;
 }
 .form-control {
 	background: #fff !important;
@@ -140,6 +141,7 @@ input:-moz-placeholder { color:#666 !important; }
 	background: #1F2B33;
 	border: 1px solid #1F2B33;
 	margin-bottom: 15px;
+	width: 150px;
 }
 .modal-title {
 	font-size: 16px !important;
