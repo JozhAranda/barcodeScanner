@@ -155,7 +155,7 @@
 		          		$( '.loader' ).fadeOut( '200' ).css( 'display', 'block' );  // Agrega el loading
 
 						var cvePlanta = localStorage.getItem('cvePlanta');
-						var scanCode = ('00000' + result.text).slice(-13);
+						var scanCode = result.text;
 						
 						var mermas 		= localStorage.getItem("Mermas");
 						var parseMerma 	= JSON.parse(mermas);
@@ -167,12 +167,12 @@
 
 						for(var i = 0; i < parseMerma.length; i++) {
 
-							if(parseMerma[i].cvePlanta == cvePlanta && parseMerma[i].Codigo == scanCode) {
+							if(parseMerma[i].cvePlanta == cvePlanta && parseMerma[i].Codigo == ('00000' + scanCode).slice(-13)) {
 
 								tempToken = 1;
 
 								tempMerma[j] = {
-									Codigo 		: ('00000' + tempMermaArray[0].Codigo).slice(-13),
+									Codigo 		: ('00000' + parseMerma[0].Codigo).slice(-13),
 									SKU 		: ('000' + parseMerma[i].SKU).slice(-4),
 									Descripcion : parseMerma[i].Descripcion,
 									Unidad 		: parseMerma[i].Unidad
