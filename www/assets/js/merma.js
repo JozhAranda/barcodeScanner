@@ -176,6 +176,8 @@ $$( '.select' ).swipeRight(function(e) {
 			return false;
 		}
 	});
+	
+	$('.modal').modal('toggle'); // Cierra el modal
 });
 /** Fin de seleccionar **/
 
