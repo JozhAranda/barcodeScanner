@@ -193,9 +193,10 @@ $(function() {
 
 				$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' );  // Quita el loading
 				$.snackbar({
-					content: "No se encontró el código", 
+					content: "No se encontró el código del producto", 
 					timeout: 5000
 				}); 
+				alert("No se encontró el código del producto");
 			}			
 
 			/********************************************************************/
@@ -230,8 +231,9 @@ $(function() {
 
 				$( '#datosMerma' ).append(
 					'<div class="notice delete">'+
-			        '<strong class="codMerma">' + tempMermaArray[0].Codigo +
-			        '<span class="cajaMerma inC pull-right" contenteditable="true">1</span></strong>'+
+			        '<strong class="codMerma">' + tempMermaArray[0].Codigo + '</strong>' +
+			        //'<span class="cajaMerma inC pull-right" contenteditable="true">1</span></strong>'+
+					'<input type="number" class="cajaMerma inC pull-right" value="1">' +
 			        '<br>'+
 			        '<span class="skuMerma" style="font-weight: 500;">' + tempMermaArray[0].SKU  + '</span> - ' +
 			        '<span class="desMerma">' + tempMermaArray[0].Descripcion + '</span>' +
@@ -243,9 +245,22 @@ $(function() {
 
 			$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' );  // Quita el loading
 
+			$( '.cajaMerma' ).on('touchstart click', function(e) {
+				
+				$(this).select();
+				
+				if($(this).val() <= 0) {
+					$(this).val("1");
+				}
+			});
+			
 			$( '.cajaMerma' ).keydown(function(e) {
-				if($(this).text() <= 0 && $(this).text() != "") {
-					$(this).text("1");
+				
+				if( (e.which == 8 || e.which == 46) && $(this).val().length <= 1) {
+					$(this).val("");
+				}
+				if($(this).val() <= 0 && $(this).val() != "") {
+					$(this).val("1");
 				}
 		     	if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {				    
 			    	return false;
@@ -354,7 +369,7 @@ function obtenerDatos() {
 	var desMerma = "";
 
 	$( '.cajaMerma' ).each(function() {
-  		cajaMerma = $(this).text(); // Se trae el texto	
+  		cajaMerma = $(this).val(); // Se trae el texto	
 		$( '#hiddenMerma' ).append( '<input type="hidden" name="Pieza" value="'+ cajaMerma +'">' ); // Se agrega una etiqueta input con el valor asignado
 	});
 	$( '.codMerma' ).each(function() {

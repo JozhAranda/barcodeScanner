@@ -139,8 +139,9 @@ $$( '.select' ).swipeRight(function(e) {
 
 	$( '#datosMerma' ).append(
 		'<div class="notice delete">'+
-        '<strong class="codMerma">' + htmlMerma.find('.codMerma').text().substring(0, 13) +
-        '<span class="cajaMerma inC pull-right" contenteditable="true">1</span></strong>'+
+        '<strong class="codMerma">' + htmlMerma.find('.codMerma').text().substring(0, 13) + '</strong>' +
+        //'<span class="cajaMerma inC pull-right" contenteditable="true">1</span></strong>'+
+		'<input type="number" class="cajaMerma inC pull-right" value="1">' +
         '<br>'+
         '<span class="skuMerma" style="font-weight: 500;">' + htmlMerma.find('.skuMerma').text()  + '</span> - ' +
         '<span class="desMerma">' + htmlMerma.find('.desMerma').text() + '</span>' +
@@ -152,15 +153,28 @@ $$( '.select' ).swipeRight(function(e) {
 	$.snackbar({
 		content: "Producto agregado", 
 		timeout: 5000
-	}); 
+	}); 	
 
-	$( '.cajaMerma' ).keydown(function(e) {
-		if($(this).text() <= 0 && $(this).text() != "") {
-			$(this).text("1");
+	$( '.cajaMerma' ).on('touchstart click', function(e) {
+		
+		$(this).select();
+		
+		if($(this).val() <= 0) {
+			$(this).val("1");
 		}
-     	if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {				    
-	    	return false;
-	    }
+	});
+	
+	$( '.cajaMerma' ).keydown(function(e) {
+		
+		if( (e.which == 8 || e.which == 46) && $(this).val().length <= 1) {
+			$(this).val("");
+		}
+		if($(this).val() <= 0 && $(this).val() != "") {
+			$(this).val("1");
+		}
+		if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {				    
+			return false;
+		}
 	});
 });
 /** Fin de seleccionar **/
