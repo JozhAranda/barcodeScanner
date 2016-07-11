@@ -149,21 +149,12 @@ $$( '.select' ).swipeRight(function(e) {
 	);
 
 	$( '#hiddenMerma' ).append( '<input type="hidden" name="Caja" value="'+ htmlMerma.find('.uniMerma').text() +'">' ); // Se agrega una etiqueta input con el valor asignado	
-
+/*
 	$.snackbar({
 		content: "Producto agregado", 
 		timeout: 5000
 	}); 	
-
-	$( '.cajaMerma' ).on('touchstart click', function(e) {
-		
-		$(this).select();
-		
-		if($(this).val() <= 0) {
-			$(this).val("1");
-		}
-	});
-	
+*/	
 	$( '.cajaMerma' ).keydown(function(e) {
 		
 		if( (e.which == 8 || e.which == 46) && $(this).val().length <= 1) {

@@ -196,7 +196,7 @@ $(function() {
 					content: "No se encontró el código del producto", 
 					timeout: 5000
 				}); 
-				alert("No se encontró el código del producto");
+				//alert("No se encontró el código del producto");
 			}			
 
 			/********************************************************************/
@@ -212,8 +212,9 @@ $(function() {
 
 					if(typeof tempMermaArray[i] !== "undefined" || typeof tempMermaArray !== "undefined") {
 						html +=	'<div class="notice select">'+
-								'<strong class="codMerma">' + tempMermaArray[i].Codigo +
-						        '<span class="cajaMerma inC pull-right" contenteditable="true">1</span></strong>'+
+								'<strong class="codMerma">' + tempMermaArray[i].Codigo + '</strong>' +
+								//'<span class="cajaMerma inC pull-right" contenteditable="true">1</span></strong>'+
+								'<input type="number" class="cajaMerma inC pull-right" value="1">' +
 						        '<br>'+
 						        '<span class="skuMerma" style="font-weight: 500;">' + tempMermaArray[i].SKU + '</span> - ' +
 						        '<span class="desMerma">' + tempMermaArray[i].Descripcion + '</span>' +
@@ -245,15 +246,6 @@ $(function() {
 
 			$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' );  // Quita el loading
 
-			$( '.cajaMerma' ).on('touchstart click', function(e) {
-				
-				$(this).select();
-				
-				if($(this).val() <= 0) {
-					$(this).val("1");
-				}
-			});
-			
 			$( '.cajaMerma' ).keydown(function(e) {
 				
 				if( (e.which == 8 || e.which == 46) && $(this).val().length <= 1) {

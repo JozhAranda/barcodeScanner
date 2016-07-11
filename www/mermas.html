@@ -172,7 +172,7 @@
 								tempToken = 1;
 
 								tempMerma[j] = {
-									Codigo 		: ('00000' + parseMerma[0].Codigo).slice(-13),
+									Codigo 		: ('00000' + parseMerma[i].Codigo).slice(-13),
 									SKU 		: ('000' + parseMerma[i].SKU).slice(-4),
 									Descripcion : parseMerma[i].Descripcion,
 									Unidad 		: parseMerma[i].Unidad
@@ -195,7 +195,7 @@
 								content: "No se encontró el código del producto", 
 								timeout: 5000
 							}); 
-							alert("No se encontró el código del producto");
+							//alert("No se encontró el código del producto");
 						}
 
 						/********************************************************************/
@@ -245,15 +245,6 @@
 
 						$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' );  // Quita el loading
 
-						$( '.cajaMerma' ).on('touchstart click', function(e) {
-							
-							$(this).select();
-							
-							if($(this).val() <= 0) {
-								$(this).val("1");
-							}
-						});
-						
 						$( '.cajaMerma' ).keydown(function(e) {
 							
 							if( (e.which == 8 || e.which == 46) && $(this).val().length <= 1) {
