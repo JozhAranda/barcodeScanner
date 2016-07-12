@@ -191,10 +191,11 @@
 						if(tempToken == 0) {
 
 							$( '.loader' ).fadeOut( '200' ).css( 'display', 'none' );  // Quita el loading
-							$.snackbar({
-								content: "No se encontró el código del producto", 
-								timeout: 5000
-							}); 
+							
+							bootbox.dialog({
+							  title: "Notificación",
+							  message: "<strong>No se encontró el código del producto</strong>"
+							});
 						}
 
 						/********************************************************************/
