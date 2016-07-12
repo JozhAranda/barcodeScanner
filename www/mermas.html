@@ -195,7 +195,6 @@
 								content: "No se encontró el código del producto", 
 								timeout: 5000
 							}); 
-							//alert("No se encontró el código del producto");
 						}
 
 						/********************************************************************/
@@ -212,7 +211,6 @@
 								if(typeof tempMermaArray[i] !== "undefined" || typeof tempMermaArray !== "undefined") {
 									html +=	'<div class="notice select">'+
 											'<strong class="codMerma">' + tempMermaArray[i].Codigo + '</strong>' +
-									        //'<span class="cajaMerma inC pull-right" contenteditable="true">1</span></strong>'+
 											'<input type="number" class="cajaMerma inC pull-right" value="1">' +
 									        '<br>'+
 									        '<span class="skuMerma" style="font-weight: 500;">' + tempMermaArray[i].SKU  + '</span> - ' +
@@ -232,7 +230,6 @@
 							$( '#datosMerma' ).append(
 								'<div class="notice delete">'+
 						        '<strong class="codMerma">' + tempMermaArray[0].Codigo + '</strong>' +
-						        //'<span class="cajaMerma inC pull-right" contenteditable="true">1</span></strong>'+
 								'<input type="number" class="cajaMerma inC pull-right" value="1">' +
 						        '<br>'+
 						        '<span class="skuMerma" style="font-weight: 500;">' + tempMermaArray[0].SKU + '</span> - ' +
@@ -247,6 +244,7 @@
 
 						$( '.cajaMerma' ).keydown(function(e) {
 							
+							$(this).focus();
 							if( (e.which == 8 || e.which == 46) && $(this).val().length <= 1) {
 								$(this).val("");
 							}

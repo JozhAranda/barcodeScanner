@@ -112,20 +112,39 @@ $(function() {
 		$( '#imeiMerma' ).val(imei);
 	} 
 	/** Fin el token **/
-
 });
 
 /** Remover un renglón de la tabla **/
 $$( '.delete' ).swipeRight(function(e) {
 
 	e.preventDefault();
-
-	var r = confirm("¿Desea eliminar el registro?");
-	if (r == true) {
 	
-		$$(this).closest('div').remove();
-	}
-
+	var producto = $$(this).closest('div');	
+	
+	producto.css('margin-left', '10px');
+	
+	bootbox.dialog({
+		message: "<p style='font-size: 16px;margin-bottom: 0;'>¿Desea eliminar <span style='color: #777;font-weight: 500;'>" + producto.find('.desMerma').text() + "</span>?</p>",
+		title: "Notificación",
+		buttons: {
+			success: {
+				label: "Aceptar",
+				className: "btn-danger btn-sm",
+				callback: function() {
+					producto.remove();
+				}
+			},
+			danger: {
+				label: "Cancelar",
+				className: "btn-default btn-sm",
+				callback: function() {
+					producto.css('margin-left', '0');
+					$('.modal').modal('toggle');
+				}
+			}
+		}
+	});	
+	
 	return false;      	
 });
 /** Fin de remover **/
@@ -140,23 +159,18 @@ $$( '.select' ).swipeRight(function(e) {
 	$( '#datosMerma' ).append(
 		'<div class="notice delete">'+
         '<strong class="codMerma">' + htmlMerma.find('.codMerma').text().substring(0, 13) + '</strong>' +
-        //'<span class="cajaMerma inC pull-right" contenteditable="true">1</span></strong>'+
-		'<input type="number" class="cajaMerma inC pull-right" value="1">' +
-        '<br>'+
-        '<span class="skuMerma" style="font-weight: 500;">' + htmlMerma.find('.skuMerma').text()  + '</span> - ' +
-        '<span class="desMerma">' + htmlMerma.find('.desMerma').text() + '</span>' +
+		'<input type="number" class="cajaMerma inC pull-right" value="' + htmlMerma.find('.cajaMerma').val() + '">' +
+        '<br>' +
+        '<span class="skuMerma" style="font-weight: 500;">' + htmlMerma.find('.skuMerma').text() + '</span> - ' +
+        '<span class="desMerma">' + $.trim(htmlMerma.find('.desMerma').text()) + '</span>' +
 		'</div>'
 	);
 
 	$( '#hiddenMerma' ).append( '<input type="hidden" name="Caja" value="'+ htmlMerma.find('.uniMerma').text() +'">' ); // Se agrega una etiqueta input con el valor asignado	
-/*
-	$.snackbar({
-		content: "Producto agregado", 
-		timeout: 5000
-	}); 	
-*/	
+
 	$( '.cajaMerma' ).keydown(function(e) {
 		
+		$(this).focus();
 		if( (e.which == 8 || e.which == 46) && $(this).val().length <= 1) {
 			$(this).val("");
 		}
